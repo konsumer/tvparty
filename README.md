@@ -4,6 +4,8 @@ Uses [DailyTVTorrents](http://www.dailytvtorrents.org/) and Transmission WebUI t
 
 "We're gonna have a TV party, tonight, alright!"
 
+It has no built-in security, and is intended to just run on your local network, and be protected from public consumption.
+
 ## Configuration
 
 Make a file called `conf/settings.json` that looks like this:
@@ -29,3 +31,9 @@ In the directory where these files are, run `npm install`, then `node app.js`
 
 I have made this primarily REST-API-based, so it can be integrated easily into other systems.  On [my NAS](http://blog.jetboystudio.com/2013/03/19/nas.html), I already have Apache running, I just need to GET/POST to mess with subscriptons, and have it running in the background to parse RSS.
 
+Here is the API:
+
+*  `GET /` - a demo subscription manager
+*  `GET /shows` - get a list of all available shows
+*  `GET /subscriptions` - get a list of current TV subscriptions
+*  `POST /subscriptions` - set a list of current TV subscriptions, using JSON

@@ -62,14 +62,8 @@ setTimeout(updateSubscriptions, 60000 * settings.updateTime); // run update ever
 var app = express();
 app.use(express.bodyParser());
 app.use(express.logger());
+app.use(express.static('public'));
 
-// describe API
-app.get('/', function(req, res){
-	res.send({
-		'subscriptions': ['GET', 'POST'],
-		'shows': ['GET']
-	});
-});
 
 // get list of current subscriptions
 app.get('/subscriptions', function(req, res){
