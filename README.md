@@ -17,12 +17,15 @@ Make a file called `conf/settings.json` that looks like this:
 	"password": "PASSWORD",
 	"host": "192.168.1.5",
 	"port": "9091",
-	"updateTime": 15
+	"updateTime": 15,
+	"serve_port": 3000
 }
 
 ```
 
 Set your username, password, etc.  updateTime is how often, in minutes, to check the RSS feed. Anything lower than 15 is just excessive.
+
+`serve_port` is the port to listen on for requests.
 
 In the directory where these files are, run `npm install`, then `node app.js`
 

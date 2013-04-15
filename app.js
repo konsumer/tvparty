@@ -88,4 +88,4 @@ app.get('/shows', function(req, res){
 	res.send(shows);
 });
 
-app.listen(3000);
+app.listen(settings.serve_port);
