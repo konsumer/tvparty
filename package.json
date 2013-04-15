@@ -6,5 +6,8 @@
 		"request": "",
 		"express":"",
 		"transmission":""
+	},
+	"devDependencies":{
+		"jsdom":""
 	}
 }

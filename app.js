@@ -7,14 +7,14 @@ var request = require('request'),
 	settings = require('./conf/settings.json')
 	transmission = new Transmission(settings),
 	seen = [],
-	subscriptions = [];
+	subscriptions = [],
+	shows = require('./shows.json');
 
 // load optional stuff from JSON files
 try { seen = require('./conf/seen.json'); }catch(e){}
 try { subscriptions = require('./conf/subscriptions.json'); }catch(e){}
 
 // grab RSS for all your favorite shows
-
 function updateSubscriptions(){
 	subscriptions.forEach(function(show){
 		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes').pipe(new FeedParser())
@@ -54,10 +54,7 @@ function updateSubscriptions(){
 updateSubscriptions();
 setTimeout(updateSubscriptions, 60000 * settings.updateTime); // run update every N minutes
 
-
-// geta  list of shows
-
-
+// serve up REST API & simple demo
 
 var app = express();
 app.use(express.bodyParser());
@@ -89,3 +86,4 @@ app.get('/shows', function(req, res){
 });
 
 app.listen(settings.serve_port);
+console.log('Listening on http://0.0.0.0:' + settings.serve_port);
