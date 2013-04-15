@@ -1,0 +1,10 @@
+{
+	"name":"tvparty",
+	"version":"0.0.1",
+	"dependencies":{
+		"feedparser": "",
+		"request": "",
+		"express":"",
+		"transmission":""
+	}
+}
