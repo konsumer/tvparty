@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TV Party</title>
+    <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        $(function(){
+            $.get('/shows', function(shows){
+                console.log(shows);
+            });
+
+            $('#add').click(function(){
+                console.log($('#show').val());
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <fieldset>
+                <legend>Add A New Subscription</legend>
+                <label for="show">
+                    <select id="show" name="show"></select>
+                </label>
+                <button id="add" class="btn btn-large btn-primary">add</button>
+            </fieldset>
+            <fieldset>
+                <legend>Current Subscriptions</legend>
+                <div id="subscriptions">None are setup!</div>
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>
