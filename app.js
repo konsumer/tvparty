@@ -10,13 +10,17 @@ var request = require('request'),
 	shows = require('./shows.json');
 
 // load optional stuff from JSON files
-try { seen = require('./conf/seen.json'); }catch(e){}
-try { subscriptions = require('./conf/subscriptions.json'); }catch(e){}
+try { seen = require('./conf/seen.json'); }catch(e){ console.log(e); }
+try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.log(e); }
 
 // grab RSS for all your favorite shows
 function updateSubscriptions(){
 	subscriptions.forEach(function(show){
-		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes').pipe(new FeedParser())			
+		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes').pipe(new FeedParser())
+			.on('error', function(err){
+				console.log('Error:' + err);
+			})
+
 			.on('article', function (article) {
 				var dir = article.meta.title.replace(' episodes at DailyTvTorrents.org','');
 
@@ -29,7 +33,7 @@ function updateSubscriptions(){
 					if (enc.type == 'application/x-bittorrent' && seen.indexOf(article.guid) === -1){
 						console.log(article.title);
 						transmission.add(enc.url, {
-							"download-dir": '/share/video/series/' + dir,
+							"download-dir": settings.add_dir + '/' + dir,
 							"autostart": true,
 						}, function(){});
 						seen.push(article.guid);
@@ -42,7 +46,7 @@ function updateSubscriptions(){
 
 			.on('end', function () {
 				fs.writeFile('./conf/seen.json', JSON.stringify(seen, null, 4), function(err) {
-					if(err) throw(err);
+					if(err) console.log(err);
 				});
 			});
 	});
@@ -55,18 +59,20 @@ setTimeout(updateSubscriptions, 60000 * settings.updateTime); // run update ever
 
 var app = express();
 
+app.use(express.bodyParser());
+app.use(express.logger());
+
 // cross-domain
 var free = function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "X-Requested-With");
         next();
 };
+
 app.all('/', free);
 app.all('/subscriptions', free);
 app.all('/shows', free);
 
-app.use(express.bodyParser());
-app.use(express.logger());
 app.use(express.static('public'));
 
 
@@ -109,6 +115,7 @@ app.post('/subscriptions', function(req, res){
 		}
 	}catch(e){
 		res.send(500, { error: e });
+		console.log(e);
 	}
 });
 

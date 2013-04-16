@@ -21,11 +21,14 @@ Make a file called `conf/settings.json` that looks like this:
 	"port": "9091",
 	"updateTime": 15,
 	"serve_port": 3000
+	"add_dir":"/share/video/series"
 }
 
 ```
 
 Set your username, password, etc. `updateTime` is how often, in minutes, to check the RSS feed. Anything lower than 15 is just excessive. `serve_port` is the port to listen on for requests.
+
+`add_dir` is teh directory where stuff will be resolved.
 
 In the directory where these files are, run `npm install`, then `node app.js`
 
