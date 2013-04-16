@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #/etc/init.d/tvparty
 
 export PATH=$PATH:/usr/local/bin
