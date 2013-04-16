@@ -1,5 +1,6 @@
 var request = require('request'),
 	fs = require('fs'),
+	path = require('path'),
 	FeedParser = require('feedparser'),
 	express = require('express'),
 	Transmission = require('transmission')
@@ -10,8 +11,8 @@ var request = require('request'),
 	shows = require('./shows.json');
 
 // load optional stuff from JSON files
-try { seen = require('./conf/seen.json'); }catch(e){ console.log(e); }
-try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.log(e); }
+try { seen = require(path.join(__dirname, 'conf', 'seen.json')); }catch(e){ console.log(e); }
+try { subscriptions = require(path.join(__dirname, 'conf', 'subscriptions.json')); }catch(e){ console.log(e); }
 
 // grab RSS for all your favorite shows
 function updateSubscriptions(){
@@ -32,20 +33,24 @@ function updateSubscriptions(){
 				article.enclosures.forEach(function(enc){
 					if (enc.type == 'application/x-bittorrent' && seen.indexOf(article.guid) === -1){
 						console.log(article.title);
-						transmission.add(enc.url, {
-							"download-dir": settings.add_dir + '/' + dir,
-							"autostart": true,
-						}, function(){});
-						seen.push(article.guid);
 						console.log(article.guid);
 						console.log(dir);
+						try{
+							transmission.add(enc.url, {
+								"download-dir": settings.add_dir + '/' + dir,
+								"autostart": true,
+							}, function(){});
+							seen.push(article.guid);
+						}catch(e){
+							console.log(e);
+						}
 						console.log("");
 					}
 				});
 			})
 
 			.on('end', function () {
-				fs.writeFile('./conf/seen.json', JSON.stringify(seen, null, 4), function(err) {
+				fs.writeFile(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen, null, 4), function(err) {
 					if(err) console.log(err);
 				});
 			});
@@ -70,7 +75,7 @@ app.use(function(req, res, next) {
 });
 
 // serve demo
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // get list of current subscriptions
@@ -101,7 +106,7 @@ app.post('/subscriptions', function(req, res){
 
 		// save it, and update
 		if (old_subscriptions != subscriptions){
-			fs.writeFile('./conf/subscriptions.json', JSON.stringify(subscriptions, null, 4), function(err) {
+			fs.writeFile(path.join(__dirname, 'conf', 'subscriptions.json'), JSON.stringify(subscriptions, null, 4), function(err) {
 				if(err){
 					res.send(500, { error: "Could not save subscription file." });
 				}else{
