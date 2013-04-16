@@ -67,6 +67,8 @@ app.get('/subscriptions', function(req, res){
 
 // set list of current subscriptions
 app.post('/subscriptions', function(req, res){
+	var old_subscriptions = subscriptions.slice();
+
 	try{		
 		// find entry with same id, remove it
 		for (i in subscriptions){
@@ -84,14 +86,17 @@ app.post('/subscriptions', function(req, res){
 			});
 		}
 
-		// save it
-		fs.writeFile('./conf/subscriptions.json', JSON.stringify(subscriptions, null, 4), function(err) {
-			if(err){
-				res.send(500, { error: "Could not save subscription file." });
-			}else{
-				res.send(subscriptions);
-			}
-		});
+		// save it, and update
+		if (old_subscriptions != subscriptions){
+			fs.writeFile('./conf/subscriptions.json', JSON.stringify(subscriptions, null, 4), function(err) {
+				if(err){
+					res.send(500, { error: "Could not save subscription file." });
+				}else{
+					res.send(subscriptions);
+				}
+			});
+			updateSubscriptions();
+		}
 	}catch(e){
 		res.send(500, { error: e });
 	}
