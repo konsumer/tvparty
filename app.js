@@ -53,7 +53,7 @@ function updateSubscriptions(){
 }
 
 updateSubscriptions();
-setTimeout(updateSubscriptions, 60000 * settings.updateTime); // run update every N minutes
+setInterval(updateSubscriptions, 60000 * settings.updateTime); // run update every N minutes
 
 // serve up REST API & simple demo
 
