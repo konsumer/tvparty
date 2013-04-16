@@ -1,10 +1,11 @@
 #!/bin/bash
 #/etc/init.d/tvparty
 
-export PATH=$PATH:/usr/local/bin
-export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
-
+# set this to wherever you installed tvparty
 INSTALL_DIR="/usr/local/share/tvparty"
+
+export PATH=$PATH:/usr/local/bin
+export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules:$INSTALL_DIR/node_modules
 
 case "$1" in
   start)
