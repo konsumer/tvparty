@@ -20,7 +20,7 @@ Make a file called `conf/settings.json` that looks like this:
 	"host": "192.168.1.5",
 	"port": "9091",
 	"updateTime": 15,
-	"serve_port": 3000
+	"serve_port": 3000,
 	"add_dir":"/share/video/series"
 }
 
