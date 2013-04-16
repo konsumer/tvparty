@@ -18,7 +18,7 @@ function updateSubscriptions(){
 	subscriptions.forEach(function(show){
 		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes').pipe(new FeedParser())
 			.on('error', function(err){
-				console.log('Error:' + err);
+				console.log(err);
 			})
 
 			.on('article', function (article) {
