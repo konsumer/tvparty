@@ -28,7 +28,7 @@ Make a file called `conf/settings.json` that looks like this:
 
 Set your username, password, etc. `updateTime` is how often, in minutes, to check the RSS feed. Anything lower than 15 is just excessive. `serve_port` is the port to listen on for requests.
 
-`add_dir` is teh directory where stuff will be resolved.
+`add_dir` is the directory where series will be put. It tries to guess name & season from name.
 
 In the directory where these files are, run `npm install`, then `node app.js`
 
