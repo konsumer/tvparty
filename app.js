@@ -11,8 +11,8 @@ var request = require('request'),
 	shows = require('./shows.json');
 
 // load optional stuff from JSON files
-try { seen = require(path.join(__dirname, 'conf', 'seen.json')); }catch(e){ console.log(e); }
-try { subscriptions = require(path.join(__dirname, 'conf', 'subscriptions.json')); }catch(e){ console.log(e); }
+try { seen = require('./conf/seen.json'); }catch(e){ console.log(e); }
+try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.log(e); }
 
 // grab RSS for all your favorite shows
 function updateSubscriptions(){
