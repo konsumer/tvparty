@@ -34,9 +34,7 @@ In the directory where these files are, run `npm install`, then `node app.js`
 
 ## Install
 
-You will need [Forever](https://github.com/nodejitsu/forever): `sudo npm -g install forever`.
-
-You can install it as a service on ubuntu/debian, by copying `tvparty.init.sh` to `/etc/init.d/tvparty`, and run `update-rc.d nodeup defaults`
+You can install it as a service on ubuntu/debian, by copying `tvparty.init.sh` to `/etc/init.d/tvparty`, and run `update-rc.d tvparty defaults`
 
 
 ## REST API
@@ -50,4 +48,4 @@ Here is the API:
 *  `GET /subscriptions` - get a list of current TV subscriptions
 *  `POST /subscriptions` - set a list of current TV subscriptions, using JSON
 
-I made a simple admin at `http://localhost:{SERVE_PORT}/` that you can use to modify your subscriptions.
+I made a sweet admin at `http://{NAS_ADDRESS}:{SERVE_PORT}/` that you can use to modify your subscriptions.
