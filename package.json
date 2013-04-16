@@ -1,14 +1,15 @@
 {
-	"name":"tvparty",
-	"version":"0.0.1",
-	"dependencies":{
+	"name": "tvparty",
+	"version": "0.0.1",
+	"dependencies": {
 		"feedparser": "",
 		"request": "",
-		"express":"",
-		"connect":"",
-		"transmission":""
+		"express": "",
+		"connect": "",
+		"transmission": ""
 	},
-	"devDependencies":{
-		"jsdom":""
+	"devDependencies": {
+		"jsdom": "",
+		"forever": ""
 	}
 }

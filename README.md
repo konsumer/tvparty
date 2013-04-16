@@ -32,6 +32,12 @@ Set your username, password, etc. `updateTime` is how often, in minutes, to chec
 
 In the directory where these files are, run `npm install`, then `node app.js`
 
+## Install
+
+You will need [Forever](https://github.com/nodejitsu/forever): `sudo npm -g install forever`.
+
+You can install it as a service on ubuntu/debian, by copying `tvparty.init.sh` to `/etc/init.d/tvparty`, and run `update-rc.d nodeup defaults`
+
 
 ## REST API
 
