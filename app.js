@@ -1,4 +1,3 @@
-
 var request = require('request'),
 	fs = require('fs'),
 	FeedParser = require('feedparser'),
@@ -55,6 +54,17 @@ setTimeout(updateSubscriptions, 60000 * settings.updateTime); // run update ever
 // serve up REST API & simple demo
 
 var app = express();
+
+// cross-domain
+var free = function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        next();
+};
+app.all('/', free);
+app.all('/subscriptions', free);
+app.all('/shows', free);
+
 app.use(express.bodyParser());
 app.use(express.logger());
 app.use(express.static('public'));
