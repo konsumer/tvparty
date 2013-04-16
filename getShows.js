@@ -5,6 +5,7 @@
 
 var jsdom  = require("jsdom"),
 	fs = require('fs'),
+	path = require('path'),
 	request = require('request'),
     window = jsdom.jsdom().createWindow();
 
@@ -12,6 +13,7 @@ var categories = ['1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g
 
 var shows=[];
 
+// go to all the category pages on DailyTVTorrents, and grab the ID & name
 categories.forEach(function(c){
 	request('http://www.dailytvtorrents.org/show-list/' + c, function (error, response, body){
 		jsdom.env({
@@ -30,7 +32,8 @@ categories.forEach(function(c){
 	});
 });
 
+// fancy handler that writes file when all else is done
 process.on('exit', function(){
-	fs.writeFileSync('./shows.json', JSON.stringify(shows, null, 4));
+	fs.writeFileSync(path.join(__dirname, 'shows.json'), JSON.stringify(shows, null, 4));
 });
 
