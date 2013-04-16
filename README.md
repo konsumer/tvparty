@@ -39,4 +39,4 @@ Here is the API:
 *  `GET /subscriptions` - get a list of current TV subscriptions
 *  `POST /subscriptions` - set a list of current TV subscriptions, using JSON
 
-I made a simple admin at `http://localhost:{SERVER_PORT}/` that you can use to modify your subscriptions.
+I made a simple admin at `http://localhost:{SERVE_PORT}/` that you can use to modify your subscriptions.
