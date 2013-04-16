@@ -6,6 +6,8 @@ Uses [DailyTVTorrents](http://www.dailytvtorrents.org/) and Transmission WebUI t
 
 It has no built-in security, and is intended to just run on your local network, and be protected from public consumption.
 
+If you want to read a [blog post about it](http://blog.jetboystudio.com/2013/04/15/automated_tv.html), sweet!
+
 ## Configuration
 
 Make a file called `conf/settings.json` that looks like this:
