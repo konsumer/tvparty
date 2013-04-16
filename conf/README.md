@@ -34,12 +34,10 @@ These are your subscriptions.  Mine looks like this:
 
 [
 	{
-		"name": "Game of Thrones",
 		"id": "game-of-thrones",
 		"options":"prefer=720&wait=3"
 	},
 	{
-		"name": "Doctor Who",
 		"id": "doctor-who",
 		"options":"prefer=720&wait=3"
 	}
