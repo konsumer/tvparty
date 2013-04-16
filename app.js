@@ -17,11 +17,9 @@ try { subscriptions = require('./conf/subscriptions.json'); }catch(e){}
 // grab RSS for all your favorite shows
 function updateSubscriptions(){
 	subscriptions.forEach(function(show){
-		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes').pipe(new FeedParser())
-			.on('error', function(err) { throw err;	})
-			
+		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes').pipe(new FeedParser())			
 			.on('article', function (article) {
-				var dir = show.name;
+				var dir = article.meta.title.replace(' episodes at DailyTvTorrents.org','');
 
 				var ep_data = article.title.match('S([0-9]+)E([0-9]+)');
 				if (ep_data[1] && ep_data[2]){
@@ -69,14 +67,33 @@ app.get('/subscriptions', function(req, res){
 
 // set list of current subscriptions
 app.post('/subscriptions', function(req, res){
-	try{
-		subscriptions = JSON.parse(req.body);
-		fs.writeFile('./conf/subscriptions.json', JSON.stringify(seen, null, 4), function(err) {
-			if(err)
+	try{		
+		// find entry with same id, remove it
+		for (i in subscriptions){
+			if (req.body.id == subscriptions[i].id){
+				subscriptions.splice(i,1);
+				break;
+			}
+		}
+
+		// add it back, if it's checked
+		if (req.body.val && req.body.val != 'false'){
+			subscriptions.push({
+				id: req.body.id,
+				options:"prefer=720&wait=3"
+			});
+		}
+
+		// save it
+		fs.writeFile('./conf/subscriptions.json', JSON.stringify(subscriptions, null, 4), function(err) {
+			if(err){
 				res.send(500, { error: "Could not save subscription file." });
+			}else{
+				res.send(subscriptions);
+			}
 		});
 	}catch(e){
-		res.send(500, { error: "Bad POST. Use JSON." });
+		res.send(500, { error: e });
 	}
 });
 
