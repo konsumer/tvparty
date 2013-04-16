@@ -63,16 +63,13 @@ app.use(express.bodyParser());
 app.use(express.logger());
 
 // cross-domain
-var free = function(req, res, next) {
+app.all('*', function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "X-Requested-With");
         next();
-};
+});
 
-app.all('/', free);
-app.all('/subscriptions', free);
-app.all('/shows', free);
-
+// serve demo
 app.use(express.static('public'));
 
 
