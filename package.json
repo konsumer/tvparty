@@ -5,6 +5,7 @@
 		"feedparser": "",
 		"request": "",
 		"express":"",
+		"connect":"",
 		"transmission":""
 	},
 	"devDependencies":{
