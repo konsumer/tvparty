@@ -24,7 +24,7 @@ These are optional, and will be created if they don't exist, and you change your
 
 ### seen.json
 
-This is an array of the GUID's of episodes you've seen.
+This is an array of the GUID's of episodes you're RSS parser has seen (and tried to download.)
 
 ### subscriptions.json
 
