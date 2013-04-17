@@ -15,7 +15,7 @@ try { seen = require('./conf/seen.json'); }catch(e){ console.log(e); }
 try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.log(e); }
 
 // grab RSS for all your favorite shows
-function updateSubscriptions(){
+function updateSubscriptions(addPaused){
 	subscriptions.forEach(function(show){
 		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes').pipe(new FeedParser())
 			.on('error', function(err){
@@ -36,10 +36,12 @@ function updateSubscriptions(){
 						console.log(article.guid);
 						console.log(dir);
 						try{
-							transmission.add(enc.url, {
-								"download-dir": settings.add_dir + '/' + dir,
-								"autostart": true,
-							}, function(){});
+							var options = {
+								"download-dir": settings.add_dir + '/' + dir
+							};
+							options.paused = (addPaused === true);
+
+							transmission.add(enc.url, options, function(){});
 							seen.push(article.guid);
 						}catch(e){
 							console.log(e);
@@ -113,7 +115,8 @@ app.post('/subscriptions', function(req, res){
 					res.send(subscriptions);
 				}
 			});
-			updateSubscriptions();
+			// add subscriptions paused
+			updateSubscriptions(true);
 		}
 	}catch(e){
 		res.send(500, { error: e });
