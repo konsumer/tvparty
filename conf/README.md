@@ -30,19 +30,13 @@ This is an array of the GUID's of episodes you're RSS parser has seen (and tried
 
 ### subscriptions.json
 
-These are your subscriptions.  Mine looks like this:
+These are your subscriptions, by ID.  FOr Game of Trhones & Doctor Who, it looks like this:
 
 ```json
 
 [
-	{
-		"id": "game-of-thrones",
-		"options":"prefer=720&wait=3"
-	},
-	{
-		"id": "doctor-who",
-		"options":"prefer=720&wait=3"
-	}
+	350,
+	103
 ]
 
 ```
