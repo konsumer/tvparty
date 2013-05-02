@@ -64,7 +64,7 @@ app.post('/subscriptions', function(req, res){
 	try{		
 		// find entry with same id, remove it
 		for (i in subscriptions){
-			if (req.body.id == subscriptions[i].id){
+			if (req.body.id == subscriptions[i]){
 				subscriptions.splice(i,1);
 				break;
 			}
@@ -72,10 +72,7 @@ app.post('/subscriptions', function(req, res){
 
 		// add it back, if it's checked
 		if (req.body.val && req.body.val != 'false'){
-			subscriptions.push({
-				id: req.body.id,
-				options:"prefer=720&wait=3"
-			});
+			subscriptions.push(req.body.id);
 		}
 
 		// save it, and update
