@@ -45,6 +45,6 @@ var request = require('request')
 request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
 	var $ = cheerio.load(body);
 	$('select[name=show] option').each(function(i, el){
-		console.log(cheerio.load(el).val());
+		console.log(el);
 	});
 });
