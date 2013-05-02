@@ -41,5 +41,5 @@ These are your subscriptions, by ID.  For Game of Thrones & Doctor Who, it looks
 
 ```
 
-You can manage these, easily, by visiting the demo-app. Basically `id` is the name of the show, on [DailyTVTorrents](http://www.dailytvtorrents.org/) and `options` are the RSS options.  The ones you see are the default in the manager, because they seem to yield the best results.
+You can manage these, easily, by visiting the demo-app. These are show IDs from [showRSS](http://showrss.karmorra.info/). The ones you see are the default in the manager, because they seem to yield the best results.
 
