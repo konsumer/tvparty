@@ -42,9 +42,15 @@ process.on('exit', function(){
 var request = require('request')
 	cheerio = require('cheerio');
 
+var shows=[];
+
 request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
 	var $ = cheerio.load(body, {ignoreWhitespace: true});
 	$('select[name=show] option').each(function(i, el){
-		console.log($(this).text());
+		shows[$(this).attr('value')] = $(this).text();
 	});
+});
+
+process.on('exit', function(){
+	fs.writeFileSync(path.join(__dirname, 'shows.json'), JSON.stringify(shows, null, 4));
 });
