@@ -1,6 +1,6 @@
 /**
  * This should not need to be run.
- * It just grabs a list of supported shows from DailyTVTorrents
+ * It just grabs a list of supported shows from showRSS
  */
 
 var request = require('request')
