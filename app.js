@@ -1,7 +1,6 @@
 var request = require('request'),
 	fs = require('fs'),
 	path = require('path'),
-	FeedParser = require('feedparser'),
 	express = require('express'),
 	Transmission = require('transmission')
 	settings = require('./conf/settings.json')
@@ -17,45 +16,8 @@ try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.l
 // grab RSS for all your favorite shows
 function updateSubscriptions(addPaused){
 	subscriptions.forEach(function(show){
-		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes').pipe(new FeedParser())
-			.on('error', function(err){
-				console.log(err);
-			})
-
-			.on('article', function (article) {
-				var dir = article.meta.title.replace(' episodes at DailyTvTorrents.org','');
-
-				var ep_data = article.title.match('S([0-9]+)E([0-9]+)');
-				if (ep_data[1] && ep_data[2]){
-					dir += '/series ' + ep_data[1];
-				}
-
-				article.enclosures.forEach(function(enc){
-					if (enc.type == 'application/x-bittorrent' && seen.indexOf(article.guid) === -1){
-						console.log(article.title);
-						console.log(article.guid);
-						console.log(dir);
-						try{
-							var options = {
-								"download-dir": settings.add_dir + '/' + dir
-							};
-							options.paused = (addPaused === true);
-
-							transmission.add(enc.url, options, function(){});
-							seen.push(article.guid);
-						}catch(e){
-							console.log(e);
-						}
-						console.log("");
-					}
-				});
-			})
-
-			.on('end', function () {
-				fs.writeFile(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen, null, 4), function(err) {
-					if(err) console.log(err);
-				});
-			});
+		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes')
+			
 	});
 }
 
