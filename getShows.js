@@ -3,9 +3,9 @@
  * It just grabs a list of supported shows from showRSS
  */
 
-var request = require('request')
-	cheerio = require('cheerio')
-	fs = require('fs')
+var request = require('request'),
+	cheerio = require('cheerio'),
+	fs = require('fs'),
 	path = require('path');
 
 var shows=[];
