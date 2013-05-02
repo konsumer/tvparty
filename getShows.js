@@ -6,9 +6,8 @@
 var request = require('request'),
 	cheerio = require('cheerio'),
 	fs = require('fs'),
-	path = require('path');
-
-var shows=[];
+	path = require('path'),
+	shows=[];
 
 request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
 	var $ = cheerio.load(body, {ignoreWhitespace: true});
