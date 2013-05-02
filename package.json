@@ -4,6 +4,7 @@
 	"dependencies": {
 		"feedparser": "",
 		"request": "",
+		"sizzle":"",
 		"express": "",
 		"connect": "",
 		"transmission": ""
