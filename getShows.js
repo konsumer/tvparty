@@ -39,9 +39,11 @@ process.on('exit', function(){
 });
 */
 
-var request = require('request');
+var request = require('request')
+	cheerio = require('cheerio');
 
 request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
-	// var shows = $('select[name=show]', body);
-	console.log(body);
+	var $ = cheerio.load(body);
+	var shows = $('select[name=show]');
+	console.log(shows);
 });
