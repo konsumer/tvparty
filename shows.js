@@ -18,13 +18,19 @@ var getShows = function(callback){
 		if (err) return callback(err);
 		var shows = [];
 		var $ = cheerio.load(body, {ignoreWhitespace: true});
-		$('ul.textcontent a.plain').each(function(){ shows.push($(this).text()); });
+		$('ul.textcontent a.plain').each(function(i, el){
+			shows.push({
+				name: $(this).text(),
+				url:  'http://kat.ph/' + $(this).attr('href'),
+				source: 'kat'
+			});
+		});
 		return callback(null, shows);
 	});
 };
 
 /**
- * Get current list of torrents for a show
+ * Get current list of torrents for a
  * @param {Integer} show The ID of the show
  * @param  {Function} callback (err, links) - links is array of current episode torrents, parsed
  */
