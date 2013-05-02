@@ -44,8 +44,7 @@ var getShow = function(callback){
 				original_title: $(this).children('title').text(),
 				torrent: $(this).children('link').text()
 			};
-			link = Object.create( link, parseTitle(link.original_title));
-			links.push(link);
+			links.push(Object.create( link, parseTitle(link.original_title)));
 		});
 		return callback(null, links);
 	});
