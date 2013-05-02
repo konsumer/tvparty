@@ -40,7 +40,9 @@ process.on('exit', function(){
 */
 
 var request = require('request')
-	cheerio = require('cheerio');
+	cheerio = require('cheerio')
+	fs = require('fs')
+	path = require('path');
 
 var shows=[];
 
