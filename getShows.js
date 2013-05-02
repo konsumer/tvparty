@@ -43,6 +43,6 @@ var request = require('request'),
 	$ = require('sizzle');
 
 request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
-	var shows = $('select[name=show]', body);
-	console.log(shows);
+	// var shows = $('select[name=show]', body);
+	console.log(body);
 });
