@@ -4,13 +4,12 @@
 	"dependencies": {
 		"feedparser": "",
 		"request": "",
-		"cheerio":"",
 		"express": "",
 		"connect": "",
 		"transmission": ""
 	},
 	"devDependencies": {
-		"jsdom": "",
+		"cheerio":"",
 		"forever": ""
 	}
 }
