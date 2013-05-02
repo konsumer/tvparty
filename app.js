@@ -20,11 +20,15 @@ function updateSubscriptions(addPaused){
 		request('http://showrss.karmorra.info/feeds/' + show + '.rss', function(err, res, body){
 			var $ = cheerio.load(body, {ignoreWhitespace: true});
 			$('item').each(function(i, el){
-				$(this).children('title').text();
+				seen.push({
+					show: show,
+					title: $(this).children('title').text(),
+					torrent: $(this).children('link').text()
+				});
 			});
-		}
-			
+		});
 	});
+	fs.writeFileSync(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen, null, 4));
 }
 
 updateSubscriptions();
