@@ -1,6 +1,6 @@
 # TV Party
 
-Uses [DailyTVTorrents](http://www.dailytvtorrents.org/) and Transmission WebUI to automate adding torrents for all your favorite shows.
+Uses [showRSS](http://showrss.karmorra.info/) and Transmission WebUI to automate adding torrents for all your favorite shows.
 
 "We're gonna have a TV party, tonight, alright!"
 
