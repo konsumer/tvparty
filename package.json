@@ -4,7 +4,7 @@
 	"dependencies": {
 		"feedparser": "",
 		"request": "",
-		"sizzle":"",
+		"cheerio":"",
 		"express": "",
 		"connect": "",
 		"transmission": ""
