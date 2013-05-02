@@ -3,6 +3,7 @@
  * It just grabs a list of supported shows from DailyTVTorrents
  */
 
+/*
 var jsdom  = require("jsdom"),
 	fs = require('fs'),
 	path = require('path'),
@@ -36,4 +37,12 @@ categories.forEach(function(c){
 process.on('exit', function(){
 	fs.writeFileSync(path.join(__dirname, 'shows.json'), JSON.stringify(shows, null, 4));
 });
+*/
 
+var request = require('request'),
+	$ = require('sizzle');
+
+request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
+	var shows = $('select[name=show]', body);
+	console.log(shows);
+});
