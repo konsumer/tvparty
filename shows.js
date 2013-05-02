@@ -6,13 +6,13 @@ Library to interact with showRSS
  */
 
 var request = require('request'),
-	cheerio = require('cheerio'),
-	path = require('path');
+	cheerio = require('cheerio');
 
 /**
  * Get list of shows
+ * @param  {Function} callback (err, shows) - shows is array of ID/Name
  */
-exports.getShows = function(callback){
+var getShows = function(callback){
 	callback = callback || function(err, shows){};
 	request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
 		if (err) return callback(err);
@@ -28,17 +28,36 @@ exports.getShows = function(callback){
 	});
 };
 
-exports.getShow = function(callback){
+/**
+ * Get current list of torrents
+ * @param  {Function} callback (err, links) - links is array of current episode torrents, parsed
+ */
+var getShow = function(callback){
 	callback = callback || function(err, links){};
 	request('http://showrss.karmorra.info/feeds/' + show + '.rss', function(err, res, body){
+		if (err) return callback(err);
+		var links = [];
 		var $ = cheerio.load(body, {ignoreWhitespace: true, xmlMode:true});
 		$('item').each(function(i, el){
-			// TODO: something smart to parse out quality, season, episode, name, group
-			seen.push({
+			var link = {
 				show: show,
-				title: $(this).children('title').text(),
+				original_title: $(this).children('title').text(),
 				torrent: $(this).children('link').text()
-			});
+			};
+			link = Object.create( link, parseTitle(link.original_title));
+			links.push(link);
 		});
+		return callback(null, links);
 	});
-}
+};
+
+/**
+ * Parse a title into extra data
+ * @param  {String} title [description]
+ * @return {Object}       A parsed object containing name, season, episode, and 
+ */
+var parseTitle = function(title){
+	var info = {};
+
+	return info;
+};
