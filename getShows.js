@@ -39,8 +39,7 @@ process.on('exit', function(){
 });
 */
 
-var request = require('request'),
-	$ = require('sizzle');
+var request = require('request');
 
 request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
 	// var shows = $('select[name=show]', body);
