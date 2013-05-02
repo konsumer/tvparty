@@ -47,7 +47,10 @@ var shows=[];
 request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
 	var $ = cheerio.load(body, {ignoreWhitespace: true});
 	$('select[name=show] option').each(function(i, el){
-		shows[$(this).attr('value')] = $(this).text();
+		shows.push({
+			id: $(this).attr('value'),
+			name: $(this).text()
+		});
 	});
 });
 
