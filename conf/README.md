@@ -30,7 +30,7 @@ This is an array of the GUID's of episodes you're RSS parser has seen (and tried
 
 ### subscriptions.json
 
-These are your subscriptions, by ID.  For Game of Thrones & Doctor Who, it looks like this:
+These are your subscriptions, by ID.  For "Game of Thrones" & "Doctor Who", it looks like this:
 
 ```json
 
