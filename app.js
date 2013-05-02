@@ -18,7 +18,7 @@ try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.l
 function updateSubscriptions(addPaused){
 	subscriptions.forEach(function(show){
 		request('http://showrss.karmorra.info/feeds/' + show + '.rss', function(err, res, body){
-			var $ = cheerio.load(body, {ignoreWhitespace: true});
+			var $ = cheerio.load(body, {ignoreWhitespace: true, xmlMode:true});
 			$('item').each(function(i, el){
 				// TODO: something smart to parse out quality, season, episode, name, group
 				seen.push({
