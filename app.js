@@ -20,6 +20,7 @@ function updateSubscriptions(addPaused){
 		request('http://showrss.karmorra.info/feeds/' + show + '.rss', function(err, res, body){
 			var $ = cheerio.load(body, {ignoreWhitespace: true});
 			$('item').each(function(i, el){
+				// TODO: something smart to parse out quality, season, episode, name, group
 				seen.push({
 					show: show,
 					title: $(this).children('title').text(),
