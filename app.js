@@ -2,8 +2,9 @@ var request = require('request'),
 	fs = require('fs'),
 	path = require('path'),
 	express = require('express'),
-	Transmission = require('transmission')
-	settings = require('./conf/settings.json')
+	Transmission = require('transmission'),
+	cheerio = require('cheerio'),
+	settings = require('./conf/settings.json'),
 	transmission = new Transmission(settings),
 	seen = [],
 	subscriptions = [],
@@ -16,7 +17,12 @@ try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.l
 // grab RSS for all your favorite shows
 function updateSubscriptions(addPaused){
 	subscriptions.forEach(function(show){
-		request('http://www.dailytvtorrents.org/rss/show/' + show.id + '?' + show.options + '&onlynew=yes')
+		request('http://showrss.karmorra.info/feeds/' + show + '.rss', function(err, res, body){
+			var $ = cheerio.load(body, {ignoreWhitespace: true});
+			$('item').each(function(i, el){
+				$(this).children('title').text();
+			});
+		}
 			
 	});
 }
