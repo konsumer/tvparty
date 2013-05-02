@@ -43,7 +43,7 @@ var request = require('request')
 	cheerio = require('cheerio');
 
 request('http://showrss.karmorra.info/?cs=feeds', function(err, res, body){
-	var $ = cheerio.load(body);
+	var $ = cheerio.load(body, {ignoreWhitespace: true});
 	$('select[name=show] option').each(function(i, el){
 		console.log(el);
 	});
