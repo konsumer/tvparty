@@ -21,7 +21,7 @@ kat.show('game-of-thrones-tv24493')
 */
 
 var torrents = [];
-kat.torrents()
+kat.torrents('121148392')
 	.on('torrent', function(torrent){
 		console.log('TORRENT', torrent);
 		torrents.push(torrent);
