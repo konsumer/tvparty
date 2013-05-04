@@ -14,4 +14,4 @@ kat.show('game-of-thrones-tv24493', function(episodes){
 
 kat.torrents('213876875', function(torrents){
 	console.log(torrents);
-});
+}, true);
