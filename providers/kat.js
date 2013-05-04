@@ -77,7 +77,7 @@ exports.list = function(callback){
 				});
 				callback(null, shows);
 			})
-			.on('clientError', function(exception, socket){
+			.on('error', function(exception){
 				callback(exception);
 			});
 	})
