@@ -81,11 +81,11 @@ exports.torrents = function(id, callback){
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
 		$('tr.odd, tr.even').each(function(i, el){
 			var torrent = {
-				name: $('.torrentname .font12px', el).text(),
-				link: 'http://kat.ph' + $('.torrentname .font12px', el).attr('href'),
-				magnet: $('a.imagnet', el).attr('href'),
-				size: $('td.center', el).slice(0,1).text(),
-				seed: $('td.center', el).slice(3,4).text(),
+				name: $('.torrentname .font12px', $(el)).text(),
+				link: 'http://kat.ph' + $('.torrentname .font12px', $(el)).attr('href'),
+				magnet: $('a.imagnet', $(el)).attr('href'),
+				size: $('td.center', $(el)).slice(0,1).text(),
+				seed: $('td.center', $(el)).slice(3,4).text(),
 			};
 
 			// normalize
