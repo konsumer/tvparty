@@ -42,7 +42,7 @@ exports.all = function(){
 				source: 'kat'
 			};
 			emitter.emit('show', show);
-			if (i == links.length){
+			if (i == links.length-1){
 				emitter.emit('end');
 			}
 		});
