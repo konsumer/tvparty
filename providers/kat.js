@@ -4,15 +4,14 @@ Provider for kat.ph tv torrents
 
  */
 
-var request = require('request'),
-	cheerio = require('cheerio'),
+var cheerio = require('cheerio'),
 	zlib = require('zlib')
 	http = require('http');
 
 
 /**
  * Get list of shows
- * @param  {Function} callback (shows) - shows is array of ID/Name
+ * @param  {Function} callback (shows) - shows is array of info
 */
 exports.list = function(callback){
 	callback = callback || function(shows){};
@@ -38,6 +37,24 @@ exports.list = function(callback){
 	})
 };
 
-exports.get = function(){
+/**
+ * Get episode listings for a single show
+ * @param  {String}   id       The ID from list()
+ * @param  {Function} callback (episodes) - episodes is array of info
+ */
+exports.get = function(id, callback){
+	callback = callback || function(shows){};
+	http.get({hostname:'kat.ph', path: '/' + id + '/'}, function(res) {
+		var chunks = [];
+		res.pipe(zlib.createGunzip())
+			.on('data', function (data) { chunks.push(data); })
+			.on('end', function(){
+				var buffer = Buffer.concat(chunks);
+				var episodes = [];
+				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
+				$('a.infoListCut').each(function(i, el){
 
-}
+				});
+			});
+	});
+};
