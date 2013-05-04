@@ -82,9 +82,7 @@ exports.torrents = function(id, callback){
 				link: 'http://kat.ph' + $('.torrentname .font12px', this).attr('href'),
 				magnet: $('a.imagnet', this).attr('href'),
 				size: $('td.center', this).slice(0,1).text(),
-				files: $('td.center', this).slice(1,2).text(),
 				seed: $('td.center', this).slice(3,4).text(),
-				leech: $('td.center', this).slice(4,5).text(),
 			};
 
 			// normalize
@@ -102,9 +100,7 @@ exports.torrents = function(id, callback){
 				torrent.size = num;
 			}
 
-			torrent.files = parseInt(torrent.files, 10);
 			torrent.seed = parseInt(torrent.seed, 10);
-			torrent.leech = parseInt(torrent.leech, 10);
 
 			torrents.push(torrent);
 		});
