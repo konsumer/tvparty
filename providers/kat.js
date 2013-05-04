@@ -62,12 +62,18 @@ exports.list = function(callback){
 	http.get({hostname:'kat.ph', path:'/tv/show/'}, function(res) {
 		var chunks = [];
 		res.pipe(zlib.createGunzip())
-			.on("data", function (data) {
-				chunks.push(data);
-			})
+			.on("data", function (data) { chunks.push(data); })
 			.on('end', function(){
 				var buffer = Buffer.concat(chunks);
-				console.log(buffer+"");
+				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
+				$('ul.textcontent a.plain').each(function(i, el){
+					var show = {
+						name: $(this).text(),
+						url:  'http://kat.ph' + $(this).attr('href'),
+						source: 'kat'
+					};
+					console.log(show);
+				});
 			});
 	})
 
