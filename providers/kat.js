@@ -6,8 +6,25 @@ Provider for kat.ph tv torrents
 
 var cheerio = require('cheerio'),
 	zlib = require('zlib'),
-	http = require('http');
+	http = require('http')
+	url = require('url');
 
+/**
+ * Shortcut for zlib GET + cheerio-parse
+ * @param  {String}   u        Full URL
+ * @param  {Function} callback called with cheerio pseudo-jquery object for page
+ */
+var get = function(u, callback){
+	http.get(url.parse(u), function(res){
+		var chunks = [];
+		res.pipe(zlib.createGunzip())
+			.on('data', function (data) { chunks.push(data); })
+			.on('end', function(){
+				var buffer = Buffer.concat(chunks);
+				callback(cheerio.load(buffer, {ignoreWhitespace: true}));
+			});
+	});
+};
 
 /**
  * Get list of shows
@@ -15,26 +32,19 @@ var cheerio = require('cheerio'),
 */
 exports.list = function(callback){
 	callback = callback || function(shows){};
-	http.get({hostname:'kat.ph', path:'/tv/show/'}, function(res) {
-		var chunks = [];
-		res.pipe(zlib.createGunzip())
-			.on('data', function (data) { chunks.push(data); })
-			.on('end', function(){
-				var buffer = Buffer.concat(chunks);
-				var shows=[];
-				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
-				$('ul.textcontent a.plain').each(function(i, el){
-					var show = {
-						id: $(this).attr('href').replace(/\//g,''),
-						name: $(this).text(),
-						url:  'http://kat.ph' + $(this).attr('href'),
-						source: 'kat'
-					};
-					shows.push(show);
-				});
-				callback(shows);
-			});
-	})
+	get('http://kat.ph/tv/show/', function($){
+		var shows=[];
+		$('ul.textcontent a.plain').each(function(i, el){
+			var show = {
+				id: $(this).attr('href').replace(/\//g,''),
+				name: $(this).text(),
+				url:  'http://kat.ph' + $(this).attr('href'),
+				source: 'kat'
+			};
+			shows.push(show);
+		});
+		callback(shows);
+	});
 };
 
 /**
@@ -43,46 +53,31 @@ exports.list = function(callback){
  * @param  {Function} callback (episodes) - episodes is array of info
  */
 exports.get = function(id, callback){
-	callback = callback || function(shows){};
-	http.get({hostname:'kat.ph', path: '/' + id + '/'}, function(res) {
-		var chunks = [];
-		res.pipe(zlib.createGunzip())
-			.on('data', function (data) { chunks.push(data); })
-			.on('end', function(){
-				var buffer = Buffer.concat(chunks);
-				var episodes = [];
-				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
-				$('a.infoListCut').each(function(i, el){
-					var episode = {
-						date: $(this).find('.versionsEpDate').text().replace(/ +/g,' '),
-						number: parseInt($(this).find('.versionsEpNo').text().match(/\d+/)[0], 10),
-						name: $(this).find('.versionsEpName').text()
-					};
-					if ($(this).attr('onclick')){
-						episode.id = $(this).attr('onclick').match(/\d+/)[0];
-						http.get({hostname:'kat.ph', path: '/media/getepisode/' + episode.id + '/'}, function(res) {
-							var chunks = [];
-							res.pipe(zlib.createGunzip())
-								.on('data', function (data) { chunks.push(data); })
-								.on('end', function(){
-									var buffer = Buffer.concat(chunks);
-									var $ = cheerio.load(buffer, {ignoreWhitespace: true});
-									episode.torrents=[];
-									$('tr.odd, tr.even').each(function(i, el){
-										var torrent = {
-											name: $('.torrentname .font12px', this).text(),
-											link: $('.torrentname .font12px', this).attr('href'),
-										};
-
-										episode.torrents.push(torrent);
-									});
-								});
-						});
-					}
-
-					episodes.push(episode);
+	get('http://kat.ph/' + id + '/', function($){
+		var episodes = [];
+		$('a.infoListCut').each(function(i, el){
+			var episode = {
+				date: $(this).find('.versionsEpDate').text().replace(/ +/g,' '),
+				number: parseInt($(this).find('.versionsEpNo').text().match(/\d+/)[0], 10),
+				name: $(this).find('.versionsEpName').text()
+			};
+			if ($(this).attr('onclick')){
+				episode.id = $(this).attr('onclick').match(/\d+/)[0];
+				get('http://kat.ph/media/getepisode/' + episode.id + '/', function($){
+					episode.torrents=[];
+					$('tr.odd, tr.even').each(function(i, el){
+						var torrent = {
+							name: $('.torrentname .font12px', this).text(),
+							link: $('.torrentname .font12px', this).attr('href'),
+						};
+						episode.torrents.push(torrent);
+					});
 				});
-				callback(episodes);
-			});
+			}
+			episodes.push(episode);
+		});
+		callback(episodes);
 	});
 };
+
+
