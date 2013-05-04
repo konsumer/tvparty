@@ -65,7 +65,7 @@ exports.get = function(id, callback){
 				episodes[i].id = $(this).attr('onclick').match(/\d+/)[0];
 				get('http://kat.ph/media/getepisode/' + episodes[i].id + '/', function($){
 					episodes[i].torrents = [];
-					$('tr.odd, tr.even').each(function(i, el){
+					$('tr.odd, tr.even').each(function(j, el){
 						var torrent = {
 							name: $('.torrentname .font12px', this).text(),
 							link: $('.torrentname .font12px', this).attr('href'),
