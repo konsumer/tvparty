@@ -27,7 +27,7 @@ var get = function(u, callback){
 /**
  * Get list of shows
  * 
- * @param  {Function} callback called on shows info
+ * @param  {Function} callback called on shows list
 */
 exports.all = function(callback){
 	callback = callback || function(shows){};
@@ -50,7 +50,7 @@ exports.all = function(callback){
  * Get episode listings for a single show
  * 
  * @param  {String}   id       The ID from list()
- * @param  {Function} callback called on info for one episode
+ * @param  {Function} callback called on all episodes for this show
  */
 exports.show = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
@@ -75,12 +75,10 @@ exports.show = function(id, callback){
  * Get list of torrents for an episode
  * 
  * @param  {String}   id       The ID from show()
- * @param  {Function} callback called on list of all torrents, & "best" torrent for this show
- * @param  {Boolean}  findBest Try to find best torrent, instead of all of them?
+ * @param  {Function} callback called on lll torrents for this show
  */
-exports.torrents = function(id, callback, findBest){
+exports.torrents = function(id, callback){
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
-		var torrents = [];
 		$('tr.odd, tr.even').each(function(i, el){
 			var torrent = {
 				name: $('.torrentname .font12px', this).text(),
@@ -91,7 +89,6 @@ exports.torrents = function(id, callback, findBest){
 			};
 
 			// normalize
-
 			var num = parseFloat(torrent.size);
 			if (torrent.size.indexOf('TB') !== -1){
 				torrent.size = num * 1024 * 1024 * 1024 * 1024;
@@ -104,19 +101,10 @@ exports.torrents = function(id, callback, findBest){
 			}else{
 				torrent.size = num;
 			}
-
 			torrent.seed = parseInt(torrent.seed, 10);
 
-			torrents.push(torrent);
+			callback(torrent);
 		});
-
-		if (findBest){
-			exports.findBest(torrents, function(best){
-				callback(best);
-			});
-		}else{
-			callback(torrents);
-		}
 	});
 };
 
