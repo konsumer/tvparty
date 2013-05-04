@@ -63,7 +63,6 @@ exports.get = function(id, callback){
 						var torrent = {
 							name: $('.torrentname .font12px', this).text(),
 							link: 'http://kat.ph' + $('.torrentname .font12px', this).attr('href'),
-							torrent: $('a.idownload', this).attr('href'),
 							magnet: $('a.imagnet', this).attr('href'),
 							size: $('td.center', this).slice(0,1).text(),
 							files: $('td.center', this).slice(1,2).text(),
