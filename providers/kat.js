@@ -125,7 +125,6 @@ exports.torrents = function(id, callback){
  * Criteria for "best" is smallest file w/ seeds
  * 
  * @param  {[type]}   torrents list of torrents available for a show
- * @param  {Function} callback called with torrent object that is "best"
  */
 exports.best = function(torrents){
 	torrents.sort(function(a,b){
