@@ -35,9 +35,9 @@ exports.all = function(callback){
 		var shows=[];
 		$('ul.textcontent a.plain').each(function(i, el){
 			var show = {
-				id: $(this).attr('href').replace(/\//g,''),
-				name: $(this).text(),
-				url:  'http://kat.ph' + $(this).attr('href'),
+				id: $(el).attr('href').replace(/\//g,''),
+				name: $(el).text(),
+				url:  'http://kat.ph' + $(el).attr('href'),
 				source: 'kat'
 			};
 			shows.push(show);
@@ -56,12 +56,12 @@ exports.show = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
 		$('a.infoListCut').each(function(i, el){
 			var episode = {
-				date: moment($(this).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').utc().unix(),
-				number: parseInt($(this).find('.versionsEpNo').text().match(/\d+/)[0], 10),
-				name: $(this).find('.versionsEpName').text()
+				date: moment($(el).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').utc().unix(),
+				number: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
+				name: $(el).find('.versionsEpName').text()
 			};
-			if ($(this).attr('onclick')){
-				episode.id = $(this).attr('onclick').match(/\d+/)[0];
+			if ($(el).attr('onclick')){
+				episode.id = $(el).attr('onclick').match(/\d+/)[0];
 				episode.has_torrents = true;
 			}else{
 				episode.has_torrents = false;
@@ -81,11 +81,11 @@ exports.torrents = function(id, callback){
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
 		$('tr.odd, tr.even').each(function(i, el){
 			var torrent = {
-				name: $('.torrentname .font12px', this).text(),
-				link: 'http://kat.ph' + $('.torrentname .font12px', this).attr('href'),
-				magnet: $('a.imagnet', this).attr('href'),
-				size: $('td.center', this).slice(0,1).text(),
-				seed: $('td.center', this).slice(3,4).text(),
+				name: $('.torrentname .font12px', el).text(),
+				link: 'http://kat.ph' + $('.torrentname .font12px', el).attr('href'),
+				magnet: $('a.imagnet', el).attr('href'),
+				size: $('td.center', el).slice(0,1).text(),
+				seed: $('td.center', el).slice(3,4).text(),
 			};
 
 			// normalize
