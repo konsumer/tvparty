@@ -63,7 +63,7 @@ exports.get = function(id, callback){
 						var torrent = {
 							name: $('.torrentname .font12px', this).text(),
 							link: 'http://kat.ph' + $('.torrentname .font12px', this).attr('href'),
-							size: $(this).find('.center[0]').text(),
+							size: $(this).find('.center:nth-child(0)').text(),
 						};
 						episode.torrents.push(torrent);
 					});
