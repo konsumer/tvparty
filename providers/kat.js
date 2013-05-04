@@ -59,9 +59,8 @@ exports.show = function(id, callback){
 			};
 			if ($(this).attr('onclick')){
 				episode.id = $(this).attr('onclick').match(/\d+/)[0];
-			}else{
-				callback(episode);
 			}
+			callback(episode);
 		});
 	});
 };
