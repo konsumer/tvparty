@@ -116,7 +116,7 @@ exports.torrents = function(id, callback){
  * @param  {[type]}   torrents list of torrents available for a show
  * @param  {Function} callback called with torrent object that is "best"
  */
-exports.findBest = function(torrents, callback){
+exports.best = function(torrents, callback){
 	torrents.sort(function(a,b){
 		return a.size - b.size;
 	});
