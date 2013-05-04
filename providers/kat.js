@@ -40,8 +40,10 @@ exports.list = function(callback){
 	request({
 		url:'http://kat.ph/tv/show/',
 		'headers': {'Accept-Encoding': 'gzip'}
-	}, function (error, response, body){
-		response.pipe(zlib.createGunzip()).pipe(process.stdout);
+	})
+	.pipe(zlib.createGunzip())
+	.on('data', function(data){
+		console.log(data+"");
 	})
 };
 
