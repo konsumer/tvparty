@@ -53,7 +53,11 @@ exports.get = function(id, callback){
 				var episodes = [];
 				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
 				$('a.infoListCut').each(function(i, el){
-					var episode = {};
+					var episode = {
+						date: $(el).find('.versionsEpDate').text(),
+						number: $(el).find('.versionsEpNo').text().match(/\d+/)[0],
+						name: $(el).find('.versionsEpName').text()
+					};
 					if ($(el).attr('onclick')){
 						episode.id = $(el).attr('onclick').match(/\d+/)[0];
 					}
