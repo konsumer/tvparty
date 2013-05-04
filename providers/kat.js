@@ -64,6 +64,10 @@ exports.get = function(id, callback){
 							name: $('.torrentname .font12px', this).text(),
 							link: 'http://kat.ph' + $('.torrentname .font12px', this).attr('href'),
 							size: $('td.center', this).slice(0,1).text(),
+							files: $('td.center', this).slice(1,2).text(),
+							age: $('td.center', this).slice(2,3).text(),
+							seed: $('td.center', this).slice(3,4).text(),
+							leech: $('td.center', this).slice(4,5).text(),
 						};
 						episode.torrents.push(torrent);
 					});
