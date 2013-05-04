@@ -38,16 +38,18 @@ exports.getShows = function(callback){
 
 exports.list = function(callback){
 	callback = callback || function(err, shows){};
-	var request = http.get({ host: 'kat.ph',
+	var req = http.get({ host: 'kat.ph',
 		path: '/tv/show/',
 		port: 80,
 		headers: { 'accept-encoding': 'gzip,deflate' } });
-	request.on('response', function(res) {
+	req.on('response', function(res) {
 		var output = fs.createWriteStream('kat.list');
 		res.pipe(zlib.createGunzip()).pipe(output);
+
+		req.on('end', function(){
+			console.log(output);
+		});
 	});
-	request.on('end', function(){
-		console.log(arguments);
-	});
+	
 };
 
