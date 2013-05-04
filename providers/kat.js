@@ -58,7 +58,6 @@ exports.all = function(){
  */
 exports.show = function(id){
 	var emitter = new events.EventEmitter();
-
 	get('http://kat.ph/' + id + '/', function($){
 		var links = $('a.infoListCut');
 		links.each(function(i, el){
@@ -79,7 +78,6 @@ exports.show = function(id){
 			}
 		});
 	});
-
 	return emitter;
 };
 
