@@ -1,6 +1,6 @@
 /*
 
-Provider for kat.ph tv torrents
+Data-provider for kat.ph tv torrents
 
  */
 
@@ -8,6 +8,7 @@ var moment = require('moment');
 
 /**
  * Shortcut for zlib GET + cheerio-parse
+ * 
  * @param  {String}   u        Full URL
  * @param  {Function} callback called with cheerio pseudo-jquery object for page
  */
@@ -25,6 +26,7 @@ var get = function(u, callback){
 
 /**
  * Get list of shows
+ * 
  * @param  {Function} callback (shows) - shows is array of info
 */
 exports.all = function(callback){
@@ -46,6 +48,7 @@ exports.all = function(callback){
 
 /**
  * Get episode listings for a single show
+ * 
  * @param  {String}   id       The ID from list()
  * @param  {Function} callback (episode) - episode is info for one episode
  */
@@ -70,6 +73,7 @@ exports.show = function(id, callback){
 
 /**
  * Get list of torrents for an episode
+ * 
  * @param  {String}   id       The ID from show()
  * @param  {Function} callback (torrents) - list of all torrents, & "best" torrent for this show
  * @param  {Boolean}  findBest Try to find best torrent, instead of all of them?
@@ -116,6 +120,14 @@ exports.torrents = function(id, callback, findBest){
 	});
 };
 
+/**
+ * Find "best" torrent, from a list of available torrents for a show
+ *
+ * Criteria for best is small file w/ seeds > 
+ * 
+ * @param  {[type]}   torrents list of torrents available for a show
+ * @param  {Function} callback callback with torrent object that is "best"
+ */
 exports.findBest = function(torrents, callback){
 
 }
