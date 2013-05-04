@@ -45,7 +45,7 @@ exports.list = function(callback){
 /**
  * Get episode listings for a single show
  * @param  {String}   id       The ID from list()
- * @param  {Function} callback (episode) - episode is info for one episode
+ * @param  {Function} callback (episode) - episode is info for one episode (called many times)
  */
 exports.get = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
