@@ -54,19 +54,22 @@ exports.get = function(id, callback){
 				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
 				$('a.infoListCut').each(function(i, el){
 					var episode = {
-						date: $(el).find('.versionsEpDate').text().replace(/ +/g,' '),
-						number: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
-						name: $(el).find('.versionsEpName').text()
+						date: $(this).find('.versionsEpDate').text().replace(/ +/g,' '),
+						number: parseInt($(this).find('.versionsEpNo').text().match(/\d+/)[0], 10),
+						name: $(this).find('.versionsEpName').text()
 					};
-					if ($(el).attr('onclick')){
-						episode.id = $(el).attr('onclick').match(/\d+/)[0];
+					if ($(this).attr('onclick')){
+						episode.id = $(this).attr('onclick').match(/\d+/)[0];
 						http.get({hostname:'kat.ph', path: '/media/getepisode/' + episode.id + '/'}, function(res) {
 							var chunks = [];
 							res.pipe(zlib.createGunzip())
 								.on('data', function (data) { chunks.push(data); })
 								.on('end', function(){
 									var buffer = Buffer.concat(chunks);
-									console.log(buffer+"");
+									var $ = cheerio.load(buffer, {ignoreWhitespace: true});
+									$('tr.odd, tr.even').each(function(i, el){
+
+									});
 								});
 						});
 					}
