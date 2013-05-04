@@ -5,7 +5,7 @@ Provider for kat.ph tv torrents
  */
 
 var cheerio = require('cheerio'),
-	zlib = require('zlib')
+	zlib = require('zlib'),
 	http = require('http');
 
 
@@ -67,8 +67,14 @@ exports.get = function(id, callback){
 								.on('end', function(){
 									var buffer = Buffer.concat(chunks);
 									var $ = cheerio.load(buffer, {ignoreWhitespace: true});
+									episode.torrents=[];
 									$('tr.odd, tr.even').each(function(i, el){
-										console.log($(el).html());
+										var torrent = {
+											name: $('.torrentname .font12px', this).text(),
+											link: $('.torrentname .font12px', this).attr('href'),
+										};
+
+										episode.torrents.push(torrent);
 									});
 								});
 						});
