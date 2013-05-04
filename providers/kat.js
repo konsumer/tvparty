@@ -16,6 +16,7 @@ exports.getShows = function(callback){
 	callback = callback || function(err, shows){};
 	request('http://kat.ph/tv/show/', function(err, res, body){
 		if (err) return callback(err);
+		console.log(body);
 		var shows = [];
 		var $ = cheerio.load(body, {ignoreWhitespace: true});
 		$('ul.textcontent a.plain').each(function(i, el){
