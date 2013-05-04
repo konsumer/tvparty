@@ -58,7 +58,7 @@ exports.list = function(callback){
 */
 
 exports.list = function(callback){
-	callback = callback || function(err, shows){};
+	callback = callback || function(shows){};
 	http.get({hostname:'poop', path:'/tv/show/'}, function(res) {
 		var chunks = [];
 		res.pipe(zlib.createGunzip())
@@ -75,10 +75,7 @@ exports.list = function(callback){
 					};
 					shows.push(show);
 				});
-				callback(null, shows);
-			})
-			.on('error', function(exception){
-				callback(exception);
+				callback(shows);
 			});
 	})
 };
