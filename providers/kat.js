@@ -133,7 +133,7 @@ exports.findBest = function(torrents, callback){
 		return a.size - b.size;
 	});
 	for (i in torrents){
-		if (torrents[i].seeds > 0){
+		if (torrents[i].seed > 0){
 			callback(torrents[i]);
 			break;
 		}
