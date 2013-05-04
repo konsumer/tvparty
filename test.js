@@ -1,7 +1,6 @@
 var kat=require('./providers/kat.js');
 
-/*
-show_count=0;
+var show_count=0;
 kat.all()
 	.on('show', function(show){
 		console.log('SHOW', show);
@@ -11,7 +10,7 @@ kat.all()
 		console.log('got ' + show_count + ' shows');
 	});
 
-episode_count=0;
+var episode_count=0;
 kat.show('game-of-thrones-tv24493')
 	.on('episode', function(episode){
 		console.log('EPISODE', episode);
@@ -20,8 +19,6 @@ kat.show('game-of-thrones-tv24493')
 	.on('end', function(){
 		console.log('got ' + episode_count + ' episodes');
 	});
-
-*/
 
 var torrents = [];
 kat.torrents('121148392')
