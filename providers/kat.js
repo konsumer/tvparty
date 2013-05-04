@@ -43,7 +43,15 @@ exports.list = function(callback){
 	})
 	.pipe(zlib.createGunzip())
 	.on('data', function(data){
-		console.log(data+"");
+		var $ = cheerio.load(data, {ignoreWhitespace: true});
+		$('ul.textcontent a.plain').each(function(i, el){
+			var show = {
+				name: $(this).text(),
+				url:  'http://kat.ph' + $(this).attr('href'),
+				source: 'kat'
+			};
+			console.log(show);
+		});
 	})
 };
 
