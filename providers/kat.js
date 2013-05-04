@@ -27,7 +27,7 @@ var get = function(u, callback){
 /**
  * Get list of shows
  * 
- * @param  {Function} callback (shows) - shows is array of info
+ * @param  {Function} callback callback on shows info
 */
 exports.all = function(callback){
 	callback = callback || function(shows){};
@@ -50,7 +50,7 @@ exports.all = function(callback){
  * Get episode listings for a single show
  * 
  * @param  {String}   id       The ID from list()
- * @param  {Function} callback (episode) - episode is info for one episode
+ * @param  {Function} callback called on info for one episode
  */
 exports.show = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
@@ -75,7 +75,7 @@ exports.show = function(id, callback){
  * Get list of torrents for an episode
  * 
  * @param  {String}   id       The ID from show()
- * @param  {Function} callback (torrents) - list of all torrents, & "best" torrent for this show
+ * @param  {Function} callback called on list of all torrents, & "best" torrent for this show
  * @param  {Boolean}  findBest Try to find best torrent, instead of all of them?
  */
 exports.torrents = function(id, callback, findBest){
@@ -126,7 +126,7 @@ exports.torrents = function(id, callback, findBest){
  * Criteria for "best" is smallest file w/ seeds
  * 
  * @param  {[type]}   torrents list of torrents available for a show
- * @param  {Function} callback callback with torrent object that is "best"
+ * @param  {Function} callback called with torrent object that is "best"
  */
 exports.findBest = function(torrents, callback){
 	torrents.sort(function(a,b){
