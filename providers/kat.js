@@ -27,7 +27,7 @@ var get = function(u, callback){
 /**
  * Get list of shows
  * 
- * @param  {Function} callback callback on shows info
+ * @param  {Function} callback called on shows info
 */
 exports.all = function(callback){
 	callback = callback || function(shows){};
