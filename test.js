@@ -1,5 +1,7 @@
 var kat=require('./providers/kat.js');
 
+/*
+
 var show_count=0;
 kat.all()
 	.on('show', function(show){
@@ -19,6 +21,8 @@ kat.show('game-of-thrones-tv24493')
 	.on('end', function(){
 		console.log('got ' + episode_count + ' episodes');
 	});
+
+*/
 
 var torrents = [];
 kat.torrents('121148392')
