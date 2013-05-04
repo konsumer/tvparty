@@ -123,12 +123,20 @@ exports.torrents = function(id, callback, findBest){
 /**
  * Find "best" torrent, from a list of available torrents for a show
  *
- * Criteria for best is small file w/ seeds > 
+ * Criteria for best is smallest file w/ seeds
  * 
  * @param  {[type]}   torrents list of torrents available for a show
  * @param  {Function} callback callback with torrent object that is "best"
  */
 exports.findBest = function(torrents, callback){
-
+	torrents.sort(function(a,b){
+		return a.size - b.size;
+	});
+	for (i in torrents){
+		if (torrents[i].seeds > 0){
+			callback(torrents[i]);
+			break;
+		}
+	}
 }
 
