@@ -59,7 +59,7 @@ exports.list = function(callback){
 
 exports.list = function(callback){
 	callback = callback || function(err, shows){};
-	http.get(options, function(res) {
+	http.get({hostname:'kat.ph', path:'/tv/show/'}, function(res) {
 		var chunks = [];
 		res.pipe(zlib.createGunzip())
 			.on("data", function (data) {
