@@ -72,11 +72,14 @@ exports.list = function(callback){
 						url:  'http://kat.ph' + $(this).attr('href'),
 						source: 'kat'
 					};
-					console.log(show);
+					shows.push(show);
 				});
+				callback(null, shows);
+			})
+			.on('clientError', function(exception, socket){
+				callback(exception);
 			});
 	})
-
 };
 
 
