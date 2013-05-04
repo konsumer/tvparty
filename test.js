@@ -5,6 +5,11 @@ kat.all(function(show){
 	console.log("SHOW", show);
 });
 
+kat.all()
+	.on('show', function(show){
+		console.log(show);
+	})
+
 
 /*
 kat.show('game-of-thrones-tv24493', function(episode){
