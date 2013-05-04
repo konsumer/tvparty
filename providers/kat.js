@@ -53,7 +53,7 @@ exports.get = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
 		$('a.infoListCut').each(function(i, el){
 			var episode = {
-				date: moment($(this).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY'),
+				date: moment($(this).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').unix(),
 				number: parseInt($(this).find('.versionsEpNo').text().match(/\d+/)[0], 10),
 				name: $(this).find('.versionsEpName').text()
 			};
