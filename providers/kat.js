@@ -20,7 +20,6 @@ var get = function(u, callback){
 			.on('data', function (data) { chunks.push(data); })
 			.on('end', function(){
 				var buffer = Buffer.concat(chunks);
-				console.log(buffer+"");
 				callback(require('cheerio').load(buffer, {ignoreWhitespace: true}));
 			});
 	});
