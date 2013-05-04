@@ -56,7 +56,9 @@ exports.all = function(){
  * @param  {String}   id       The ID from list()
  * @param  {Function} callback called on all episodes for this show
  */
-exports.show = function(id, callback){
+exports.show = function(id){
+	var emitter = new events.EventEmitter();
+
 	get('http://kat.ph/' + id + '/', function($){
 		$('a.infoListCut').each(function(i, el){
 			var episode = {
@@ -70,7 +72,7 @@ exports.show = function(id, callback){
 			}else{
 				episode.has_torrents = false;
 			}
-			callback(episode);
+			emitter.emit('episode', episode);
 		});
 	});
 };
