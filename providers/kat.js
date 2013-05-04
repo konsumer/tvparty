@@ -68,7 +68,7 @@ exports.get = function(id, callback){
 									var buffer = Buffer.concat(chunks);
 									var $ = cheerio.load(buffer, {ignoreWhitespace: true});
 									$('tr.odd, tr.even').each(function(i, el){
-
+										console.log($(el).html());
 									});
 								});
 						});
