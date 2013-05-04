@@ -46,7 +46,7 @@ exports.list = function(callback){
 		var output = fs.createWriteStream('kat.list');
 		res.pipe(zlib.createGunzip()).pipe(output);
 	});
-	request.on('data', function(){
+	request.on('end', function(){
 		console.log(arguments);
 	});
 };
