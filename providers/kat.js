@@ -54,27 +54,26 @@ exports.list = function(callback){
  */
 exports.get = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
-		var episodes = [];
+		var episodes[i] = [];
 		$('a.infoListCut').each(function(i, el){
-			var episode = {
+			episodes[i] = {
 				date: $(this).find('.versionsEpDate').text().replace(/ +/g,' '),
 				number: parseInt($(this).find('.versionsEpNo').text().match(/\d+/)[0], 10),
 				name: $(this).find('.versionsEpName').text()
 			};
 			if ($(this).attr('onclick')){
-				episode.id = $(this).attr('onclick').match(/\d+/)[0];
-				get('http://kat.ph/media/getepisode/' + episode.id + '/', function($){
-					episode.torrents=[];
+				episodes[i].id = $(this).attr('onclick').match(/\d+/)[0];
+				get('http://kat.ph/media/getepisode/' + episodes[i].id + '/', function($){
+					episodes[i].torrents = [];
 					$('tr.odd, tr.even').each(function(i, el){
 						var torrent = {
 							name: $('.torrentname .font12px', this).text(),
 							link: $('.torrentname .font12px', this).attr('href'),
 						};
-						episode.torrents.push(torrent);
+						episodes[i].torrents.push(torrent);
 					});
 				});
 			}
-			episodes.push(episode);
 		});
 		callback(episodes);
 	});
