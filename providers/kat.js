@@ -62,11 +62,11 @@ exports.get = function(id, callback){
 						episode.id = $(el).attr('onclick').match(/\d+/)[0];
 						http.get({hostname:'kat.ph', path: '/media/getepisode/' + episode.id + '/'}, function(res) {
 							var chunks = [];
-							res.on('data', function (data) { chunks.push(data); })
+							res.pipe(zlib.createGunzip())
+								.on('data', function (data) { chunks.push(data); })
 								.on('end', function(){
-									var data = JSON.parse(Buffer.concat(chunks)+"");
-									var $ = cheerio.load(data.html, {ignoreWhitespace: true});
-									console.log(data.html);
+									var buffer = Buffer.concat(chunks);
+									console.log(buffer+"");
 								});
 						});
 					}
