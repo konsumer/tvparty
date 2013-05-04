@@ -47,7 +47,7 @@ exports.all = function(callback){
 /**
  * Get episode listings for a single show
  * @param  {String}   id       The ID from list()
- * @param  {Function} callback (episode) - episode is info for one episode (called many times)
+ * @param  {Function} callback (episode) - episode is info for one episode
  */
 exports.show = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
@@ -72,7 +72,7 @@ exports.show = function(id, callback){
  * Get list of torrents for an episode
  * @param  {String}   id       The ID from show()
  * @param  {Function} callback (torrents) - list of all torrents, & "best" torrent for this show
- * @param  {Boolean}  findBest Try to find best torrent?
+ * @param  {Boolean}  findBest Try to find best torrent, instead of all of them?
  */
 exports.torrents = function(id, callback, findBest){
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
