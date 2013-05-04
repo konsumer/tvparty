@@ -62,7 +62,7 @@ exports.get = function(id, callback){
 					$('tr.odd, tr.even').each(function(j, el){
 						var torrent = {
 							name: $('.torrentname .font12px', this).text(),
-							link: $('.torrentname .font12px', this).attr('href'),
+							link: 'http://kat.ph' + $('.torrentname .font12px', this).attr('href'),
 						};
 						episode.torrents.push(torrent);
 					});
