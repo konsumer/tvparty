@@ -1,11 +1,11 @@
 var kat=require('./providers/kat.js');
 
 /*
-kat.list(function(shows){
+kat.all(function(shows){
 	console.log(shows);
 });
 */
 
-kat.get('game-of-thrones-tv24493', function(episodes){
+kat.show('game-of-thrones-tv24493', function(episodes){
 	console.log(episodes);
 });
