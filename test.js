@@ -1,10 +1,6 @@
 var kat=require('./providers/kat.js');
 
 
-kat.all(function(show){
-	console.log("SHOW", show);
-});
-
 kat.all()
 	.on('show', function(show){
 		console.log(show);
