@@ -54,7 +54,9 @@ exports.get = function(id, callback){
 				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
 				$('a.infoListCut').each(function(i, el){
 					var episode = {};
-					episode.id = $(el).attr('onclick').match(/\d+/)[0];
+					if ($(el).attr('onclick')){
+						episode.id = $(el).attr('onclick').match(/\d+/)[0];
+					}
 					console.log(episode);
 				});
 			});
