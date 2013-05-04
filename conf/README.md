@@ -23,7 +23,7 @@ Make a file called `conf/settings.json` that looks like this:
 
 ## Optional
 
-These are optional, and will be created if they don't exist, and you change your subscriptions or parse RSS.
+These files are optional, and will be created if they don't exist, and you change your subscriptions or parse RSS.
 
 ### seen.json
 
