@@ -70,7 +70,7 @@ exports.get = function(id, callback){
 							seed: $('td.center', this).slice(3,4).text(),
 							leech: $('td.center', this).slice(4,5).text(),
 						};
-						torrent.torrent = torrent.magnet.match(/urn:btih:(.+)&/)[1]
+						torrent.torrent = torrent.magnet.match(/urn:btih:\(.+\)&/)[1]
 						episode.torrents.push(torrent);
 					});
 					callback(episode);
