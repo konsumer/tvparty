@@ -19,11 +19,13 @@ exports.getShows = function(callback){
 		var shows = [];
 		var $ = cheerio.load(body, {ignoreWhitespace: true});
 		$('ul.textcontent a.plain').each(function(i, el){
-			shows.push({
+			var show = {
 				name: $(this).text(),
 				url:  'http://kat.ph' + $(this).attr('href'),
 				source: 'kat'
-			});
+			};
+			console.log(show);
+			shows.push(show);
 		});
 		return callback(null, shows);
 	});
