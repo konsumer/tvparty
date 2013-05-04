@@ -6,7 +6,8 @@ Provider for kat.ph tv torrents
 
 var http = require('http'),
 	cheerio = require('cheerio')
-	zlib = require('zlib');
+	zlib = require('zlib')
+	fs=require('fs');
 
 
 /**
