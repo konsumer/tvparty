@@ -71,6 +71,8 @@ exports.get = function(id, callback){
 							leech: $('td.center', this).slice(4,5).text(),
 						};
 
+						// normalize
+
 						var num = parseFloat(torrent.size);
 						if (torrent.size.indexOf('TB')!=-1){
 							torrent.size = num * 1024 * 1024 * 1024 * 1024;
@@ -84,6 +86,9 @@ exports.get = function(id, callback){
 							torrent.size = num;
 						}
 
+						torrent.files = parseInt(torrent.files, 10);
+						torrent.seed = parseInt(torrent.seed, 10);
+						torrent.leech = parseInt(torrent.leech, 10);
 
 						episode.torrents.push(torrent);
 					});
