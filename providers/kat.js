@@ -55,7 +55,7 @@ exports.get = function(id, callback){
 				$('a.infoListCut').each(function(i, el){
 					var episode = {};
 					if ($(el).attr('onclick')){
-						episode.id = $(el).attr('onclick').match(/d+/);
+						episode.id = $(el).attr('onclick').match(/\d+/);
 					}
 					console.log(episode);
 				});
