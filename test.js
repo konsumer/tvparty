@@ -27,5 +27,5 @@ kat.torrents('121148392')
 		torrents.push(torrent);
 	})
 	.on('end', function(){
-		console.log('BEST', kat.best(torrents));
+		console.log('\nBEST', kat.best(torrents));
 	});
