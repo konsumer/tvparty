@@ -77,12 +77,10 @@ exports.get = function(id, callback){
 
 						var num = parseFloat(torrent.size);
 						if (torrent.size.indexOf('TB')!=-1){
-							torrent.size = num * 1024 * 1024 * 1024 * 1024;
-						}else if (torrent.size.indexOf('GB')!=-1){
 							torrent.size = num * 1024 * 1024 * 1024;
-						}else if (torrent.size.indexOf('MB')!=-1){
+						}else if (torrent.size.indexOf('GB')!=-1){
 							torrent.size = num * 1024 * 1024;
-						}else if (torrent.size.indexOf('KB')!=-1){
+						}else if (torrent.size.indexOf('MB')!=-1){
 							torrent.size = num * 1024;
 						}else{
 							torrent.size = num;
