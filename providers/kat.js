@@ -28,12 +28,11 @@ var get = function(u, callback){
 /**
  * Get list of shows
  * 
- * @param  {Function} callback called on shows list
+ * @param  {Function} callback called on a show
 */
 exports.all = function(callback){
-	callback = callback || function(shows){};
+	callback = callback || function(show){};
 	get('http://kat.ph/tv/show/', function($){
-		var shows=[];
 		$('ul.textcontent a.plain').each(function(i, el){
 			var show = {
 				id: $(el).attr('href').replace(/\//g,''),
@@ -41,9 +40,8 @@ exports.all = function(callback){
 				url:  'http://kat.ph' + $(el).attr('href'),
 				source: 'kat'
 			};
-			shows.push(show);
+			callback(show);
 		});
-		callback(shows);
 	});
 };
 
