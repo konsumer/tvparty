@@ -123,7 +123,7 @@ exports.torrents = function(id, callback, findBest){
 /**
  * Find "best" torrent, from a list of available torrents for a show
  *
- * Criteria for best is smallest file w/ seeds (I like low-quality torrents)
+ * Criteria for best is smallest file w/ seeds
  * 
  * @param  {[type]}   torrents list of torrents available for a show
  * @param  {Function} callback callback with torrent object that is "best"
