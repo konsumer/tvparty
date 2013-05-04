@@ -61,8 +61,9 @@ exports.get = function(id, callback){
 					if ($(el).attr('onclick')){
 						episode.id = $(el).attr('onclick').match(/\d+/)[0];
 					}
-					console.log(episode);
+					episodes.push(episode);
 				});
+				callback(episodes);
 			});
 	});
 };
