@@ -132,6 +132,7 @@ exports.findBest = function(torrents, callback){
 	torrents.sort(function(a,b){
 		return a.size - b.size;
 	});
+	console.log(torrents);
 	for (i in torrents){
 		if (torrents[i].seed > 0){
 			callback(torrents[i]);
