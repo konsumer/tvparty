@@ -60,7 +60,8 @@ exports.show = function(id){
 	var emitter = new events.EventEmitter();
 
 	get('http://kat.ph/' + id + '/', function($){
-		$('a.infoListCut').each(function(i, el){
+		var links = $('a.infoListCut');
+		links.each(function(i, el){
 			var episode = {
 				date: moment($(el).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').utc().unix(),
 				number: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
@@ -73,8 +74,13 @@ exports.show = function(id){
 				episode.has_torrents = false;
 			}
 			emitter.emit('episode', episode);
+			if (i == links.length-1){
+				emitter.emit('end');
+			}
 		});
 	});
+
+	return emitter;
 };
 
 /**
