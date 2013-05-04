@@ -4,7 +4,8 @@ Data-provider for kat.ph tv torrents
 
  */
 
-var moment = require('moment');
+var moment = require('moment'),
+	events = require('events');
 
 /**
  * Shortcut for zlib GET + cheerio-parse
