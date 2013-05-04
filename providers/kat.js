@@ -54,7 +54,7 @@ exports.list = function(callback){
  */
 exports.get = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
-		var episodes[i] = [];
+		var episodes = [];
 		$('a.infoListCut').each(function(i, el){
 			episodes[i] = {
 				date: $(this).find('.versionsEpDate').text().replace(/ +/g,' '),
