@@ -1,7 +1,6 @@
-
 /*
 
-Library to interact with kat.ph
+Provider for kat.ph tv torrents
 
  */
 
