@@ -1,21 +1,24 @@
 var kat=require('./providers/kat.js');
 
 /*
+count=0;
 kat.all()
 	.on('show', function(show){
 		console.log('SHOW', show);
+		count++;
 	})
 	.on('end', function(){
-		console.log('got shows');
+		console.log('got ' + count + ' shows');
 	});
 
-
+count=0;
 kat.show('game-of-thrones-tv24493')
 	.on('episode', function(episode){
 		console.log('EPISODE', episode);
+		count++;
 	})
 	.on('end', function(){
-		console.log('got episodes');
+		console.log('got ' + count + ' episodes');
 	});
 
 */
