@@ -5,6 +5,9 @@ kat.all()
 	.on('show', function(show){
 		console.log(show);
 	})
+	.on('end', function(){
+		console.log('got shows');
+	});
 
 
 /*
