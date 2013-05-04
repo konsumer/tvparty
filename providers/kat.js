@@ -31,19 +31,24 @@ var get = function(u, callback){
  * 
  * @param  {Function} callback called on a show
 */
-exports.all = function(callback){
-	callback = callback || function(show){};
+exports.all = function(){
+	var emitter = new events.EventEmitter();
 	get('http://kat.ph/tv/show/', function($){
-		$('ul.textcontent a.plain').each(function(i, el){
+		var links = $('ul.textcontent a.plain');
+		links.each(function(i, el){
 			var show = {
 				id: $(el).attr('href').replace(/\//g,''),
 				name: $(el).text(),
 				url:  'http://kat.ph' + $(el).attr('href'),
 				source: 'kat'
 			};
-			callback(show);
+			emitter.emit('show', show);
+			if (i == links.length){
+				emitter.emit('end');
+			}
 		});
 	});
+	return emitter;
 };
 
 /**
