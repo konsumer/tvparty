@@ -65,6 +65,7 @@ exports.list = function(callback){
 			.on('data', function (data) { chunks.push(data); })
 			.on('end', function(){
 				var buffer = Buffer.concat(chunks);
+				var shows=[];
 				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
 				$('ul.textcontent a.plain').each(function(i, el){
 					var show = {
