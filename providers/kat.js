@@ -62,7 +62,7 @@ exports.list = function(callback){
 	http.get({hostname:'kat.ph', path:'/tv/show/'}, function(res) {
 		var chunks = [];
 		res.pipe(zlib.createGunzip())
-			.on("data", function (data) { chunks.push(data); })
+			.on('data', function (data) { chunks.push(data); })
 			.on('end', function(){
 				var buffer = Buffer.concat(chunks);
 				var $ = cheerio.load(buffer, {ignoreWhitespace: true});
