@@ -12,9 +12,14 @@ kat.show('game-of-thrones-tv24493', function(episodes){
 });
 */
 
-kat.torrents('266404348', function(torrents){
-	console.log(torrents);
+var torrents = [];
+kat.torrents('266404348', function(torrent){
+	console.log(torrent);
+	torrents.push(torrent);
+});
+
+process.on('exit', function(){
 	kat.best(torrents, function(best){
-		console.log('BEST: ', best);
+		console.log('BEST', best);
 	});
 });
