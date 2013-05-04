@@ -42,7 +42,8 @@ exports.list = function(callback){
 		'headers': {'Accept-Encoding': 'gzip'}
 	})
 	.pipe(zlib.createGunzip())
-	.on('end', function(){
+	.on('data', function(){
+		console.log('cool');
 		console.log(arguments);
 	})
 };
