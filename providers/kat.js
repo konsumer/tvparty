@@ -38,5 +38,6 @@ exports.list = function(callback){
 	})
 };
 
-exports.get = function()
+exports.get = function(){
 
+}
