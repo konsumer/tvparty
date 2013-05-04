@@ -5,13 +5,14 @@ Provider for kat.ph tv torrents
  */
 
 var request = require('request'),
-	cheerio = require('cheerio');
+	cheerio = require('cheerio')
+	zlib = require('zlib');
 
 
 /**
  * Get list of shows
  * @param  {Function} callback (err, shows) - shows is array of ID/Name
- */
+
 exports.getShows = function(callback){
 	callback = callback || function(err, shows){};
 	request('http://kat.ph/tv/show/', function(err, res, body){
@@ -30,6 +31,18 @@ exports.getShows = function(callback){
 		});
 		return callback(null, shows);
 	});
+};
+ */
+
+/**
+ * Get list of shows
+ * @param  {Function} callback (err, shows) - shows is array of ID/Name
+*/
+exports.getShows = function(callback){
+	callback = callback || function(err, shows){};
+	request({url:'http://kat.ph/tv/show/', 'headers': {'Accept-Encoding': 'gzip'} })
+		.pipe(zlib.createGunzip())
+		.pipe(process.stdout);
 };
 
 /**
