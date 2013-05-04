@@ -39,7 +39,7 @@ exports.list = function(callback){
 	callback = callback || function(err, shows){};
 	request({
 		url:'http://kat.ph/tv/show/',
-		'headers': {'Accept-Encoding': 'gzip'}
+		'headers': {'Accept-Encoding': 'gzip,deflate'}
 	})
 	.pipe(zlib.createGunzip())
 	.on('data', function(data){
