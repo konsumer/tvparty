@@ -16,7 +16,7 @@ Make a file called `conf/settings.json` that looks like this:
     "updateTime": 15,
     "serve_port": 3000,
     "add_dir":"/share/video/series",
-    "provider":"kat"
+    "provider": "kat"
 }
 
 ```
