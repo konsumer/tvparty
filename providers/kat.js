@@ -42,8 +42,8 @@ exports.getShows = function(callback){
 	callback = callback || function(err, shows){};
 	request({url:'http://kat.ph/tv/show/', 'headers': {'Accept-Encoding': 'gzip'} })
 		.pipe(zlib.createGunzip())
-		.on('data', function(){
-			console.log(arguments+"");
+		.finish(function(){
+			console.log(arguments);
 		});
 };
 
