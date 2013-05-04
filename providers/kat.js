@@ -4,6 +4,8 @@ Provider for kat.ph tv torrents
 
  */
 
+var moment = require('moment');
+
 /**
  * Shortcut for zlib GET + cheerio-parse
  * @param  {String}   u        Full URL
@@ -51,7 +53,7 @@ exports.get = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
 		$('a.infoListCut').each(function(i, el){
 			var episode = {
-				date: $(this).find('.versionsEpDate').text().replace(/ +/g,' '),
+				date: moment($(this).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY'),
 				number: parseInt($(this).find('.versionsEpNo').text().match(/\d+/)[0], 10),
 				name: $(this).find('.versionsEpName').text()
 			};
