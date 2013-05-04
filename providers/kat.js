@@ -88,6 +88,7 @@ exports.show = function(id){
  * @param  {Function} callback called on lll torrents for this show
  */
 exports.torrents = function(id, callback){
+	var emitter = new events.EventEmitter();
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
 		$('tr.odd, tr.even').each(function(i, el){
 			var torrent = {
@@ -126,14 +127,13 @@ exports.torrents = function(id, callback){
  * @param  {[type]}   torrents list of torrents available for a show
  * @param  {Function} callback called with torrent object that is "best"
  */
-exports.best = function(torrents, callback){
+exports.best = function(torrents){
 	torrents.sort(function(a,b){
 		return a.size - b.size;
 	});
 	for (i in torrents){
 		if (torrents[i].seed > 0){
-			callback(torrents[i]);
-			break;
+			return torrents[i];
 		}
 	}
 }
