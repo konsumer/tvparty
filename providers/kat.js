@@ -72,8 +72,9 @@ exports.show = function(id, callback){
  * Get list of torrents for an episode
  * @param  {String}   id       The ID from show()
  * @param  {Function} callback (torrents) - list of all torrents, & "best" torrent for this show
+ * @param  {Boolean}  findBest Try to find best torrent?
  */
-exports.torrents = function(id, callback){
+exports.torrents = function(id, callback, findBest){
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
 		var torrents = [];
 		$('tr.odd, tr.even').each(function(j, el){
@@ -104,7 +105,18 @@ exports.torrents = function(id, callback){
 
 			torrents.push(torrent);
 		});
-		callback(torrents);
+
+		if (findBest){
+			exports.findBest(torrents, function(best){
+				callback(best);
+			});
+		}else{
+			callback(torrents);
+		}
 	});
 };
+
+exports.findBest = function(torrents, callback){
+
+}
 
