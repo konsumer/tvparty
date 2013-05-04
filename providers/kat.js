@@ -70,6 +70,8 @@ exports.get = function(id, callback){
 							seed: $('td.center', this).slice(3,4).text(),
 							leech: $('td.center', this).slice(4,5).text(),
 						};
+						magnet:?xt=urn:btih:38360055BA1F51AAA749E55B25DE563C910179D2&dn=game+of+…+bluray+x264+miky&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce
+						torrent.torrent = torrent.magnet.match(/urn:btih:(.+)&/)
 						episode.torrents.push(torrent);
 					});
 					callback(episode);
