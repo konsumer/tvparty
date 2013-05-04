@@ -81,7 +81,7 @@ exports.show = function(id, callback){
 exports.torrents = function(id, callback, findBest){
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
 		var torrents = [];
-		$('tr.odd, tr.even').each(function(j, el){
+		$('tr.odd, tr.even').each(function(i, el){
 			var torrent = {
 				name: $('.torrentname .font12px', this).text(),
 				link: 'http://kat.ph' + $('.torrentname .font12px', this).attr('href'),
