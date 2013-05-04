@@ -4,24 +4,19 @@ Provider for kat.ph tv torrents
 
  */
 
-var cheerio = require('cheerio'),
-	zlib = require('zlib'),
-	http = require('http')
-	url = require('url');
-
 /**
  * Shortcut for zlib GET + cheerio-parse
  * @param  {String}   u        Full URL
  * @param  {Function} callback called with cheerio pseudo-jquery object for page
  */
 var get = function(u, callback){
-	http.get(url.parse(u), function(res){
+	require('http').get(require('url').parse(u), function(res){
 		var chunks = [];
-		res.pipe(zlib.createGunzip())
+		res.pipe(require('zlib').createGunzip())
 			.on('data', function (data) { chunks.push(data); })
 			.on('end', function(){
 				var buffer = Buffer.concat(chunks);
-				callback(cheerio.load(buffer, {ignoreWhitespace: true}));
+				callback(require('cheerio').load(buffer, {ignoreWhitespace: true}));
 			});
 	});
 };
