@@ -45,32 +45,33 @@ exports.list = function(callback){
 /**
  * Get episode listings for a single show
  * @param  {String}   id       The ID from list()
- * @param  {Function} callback (episodes) - episodes is array of info
+ * @param  {Function} callback (episode) - episode is info for one episode
  */
 exports.get = function(id, callback){
 	get('http://kat.ph/' + id + '/', function($){
-		var episodes = [];
 		$('a.infoListCut').each(function(i, el){
-			episodes[i] = {
+			var episode = {
 				date: $(this).find('.versionsEpDate').text().replace(/ +/g,' '),
 				number: parseInt($(this).find('.versionsEpNo').text().match(/\d+/)[0], 10),
 				name: $(this).find('.versionsEpName').text()
 			};
 			if ($(this).attr('onclick')){
-				episodes[i].id = $(this).attr('onclick').match(/\d+/)[0];
-				get('http://kat.ph/media/getepisode/' + episodes[i].id + '/', function($){
-					episodes[i].torrents = [];
+				episode.id = $(this).attr('onclick').match(/\d+/)[0];
+				get('http://kat.ph/media/getepisode/' + episode.id + '/', function($){
+					episode.torrents = [];
 					$('tr.odd, tr.even').each(function(j, el){
 						var torrent = {
 							name: $('.torrentname .font12px', this).text(),
 							link: $('.torrentname .font12px', this).attr('href'),
 						};
-						episodes[i].torrents.push(torrent);
+						episode.torrents.push(torrent);
 					});
+					callback(episode);
 				});
+			}else{
+				callback(episode);
 			}
 		});
-		callback(episodes);
 	});
 };
 
