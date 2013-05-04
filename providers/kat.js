@@ -4,7 +4,7 @@ Provider for kat.ph tv torrents
 
  */
 
-var request = require('request'),
+var http = require('http'),
 	cheerio = require('cheerio')
 	zlib = require('zlib');
 
@@ -34,32 +34,19 @@ exports.getShows = function(callback){
 };
  */
 
-/**
- * Get list of shows
- * @param  {Function} callback (err, shows) - shows is array of ID/Name
-*/
-exports.getShows = function(callback){
-	callback = callback || function(err, shows){};
-	request({url:'http://kat.ph/tv/show/', 'headers': {'Accept-Encoding': 'gzip'} })
-		.setEncoding('utf8')
-		.pipe(zlib.createGunzip())
-		.on('data',function(){
-			console.log(arguments);
-		});
-};
 
-/**
- * Get current list of torrents for a show
- * @param {Integer} show The ID of the show
- * @param  {Function} callback (err, links) - links is array of current episode torrents, parsed
- */
-exports.getShow = function(show, callback){
-	callback = callback || function(err, links){};
-	request(show.url, function(err, res, body){
-		if (err) return callback(err);
-		var links = [];
-		var $ = cheerio.load(body, {ignoreWhitespace: true, xmlMode:true});
-		
-		return callback(null, links);
+exports.list = function(callback){
+	callback = callback || function(err, shows){};
+	var request = http.get({ host: 'kat.ph',
+		path: '/tv/show/',
+		port: 80,
+		headers: { 'accept-encoding': 'gzip,deflate' } });
+	request.on('response', function(res) {
+		var output = fs.createWriteStream('kat.list');
+		res.pipe(zlib.createGunzip()).pipe(output);
+	});
+	request.on('data', function(){
+		console.log(arguments);
 	});
 };
+
