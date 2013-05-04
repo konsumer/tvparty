@@ -90,7 +90,8 @@ exports.show = function(id){
 exports.torrents = function(id, callback){
 	var emitter = new events.EventEmitter();
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
-		$('tr.odd, tr.even').each(function(i, el){
+		var rows = $('tr.odd, tr.even');
+		rows.each(function(i, el){
 			var torrent = {
 				name: $('.torrentname .font12px', $(el)).text(),
 				link: 'http://kat.ph' + $('.torrentname .font12px', $(el)).attr('href'),
@@ -114,9 +115,13 @@ exports.torrents = function(id, callback){
 			}
 			torrent.seed = parseInt(torrent.seed, 10);
 
-			callback(torrent);
+			emitter.emit('torrent', torrent);
+			if (i == rows.length-1){
+				emitter.emit('end');
+			}
 		});
 	});
+	return emitter;
 };
 
 /**
@@ -124,7 +129,8 @@ exports.torrents = function(id, callback){
  *
  * Criteria for "best" is smallest file w/ seeds
  * 
- * @param  {[type]}   torrents list of torrents available for a show
+ * @param   {Array}   torrents list of torrents available for a show
+ * @returns {Object}  the "best" torrent
  */
 exports.best = function(torrents){
 	torrents.sort(function(a,b){
