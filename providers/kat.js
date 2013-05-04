@@ -82,6 +82,8 @@ exports.get = function(id, callback){
 							torrent.size = num * 1024 * 1024;
 						}else if (torrent.size.indexOf('MB')!=-1){
 							torrent.size = num * 1024;
+						}else if (torrent.size.indexOf('KB')!=-1){
+							torrent.size = num * 1024;
 						}else{
 							torrent.size = num;
 						}
