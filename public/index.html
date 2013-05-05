@@ -33,7 +33,7 @@
             shows.forEach(function(show){
                 show_names.push(show.name);
             });
-            $('.typeahead').typeahead({source:show_names});
+            $('#show').typeahead({source:show_names});
             $.getJSON('/subscriptions', function(subscriptions){
                 console.log('subscriptions', subscriptions);
             });
