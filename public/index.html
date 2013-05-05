@@ -44,10 +44,9 @@
     <script>
     function subscribe(button, id){
         if ($(button).text() == 'subscribe'){
-            $(button).removeClass().addClass().text('unsubscribe');
-
+            $(button).removeClass('btn-primary').addClass('btn-inverse').text('unsubscribe');
         }else{
-
+            $(button).removeClass('btn-inverse').addClass('btn-primary').text('subscribe');
         }
     }
 
