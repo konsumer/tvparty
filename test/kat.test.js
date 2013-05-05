@@ -34,7 +34,7 @@ describe('Kat Provider Plugin', function(){
 				episode_count++;
 			})
 			.on('end', function(){
-				// maybe a bit fragile. should design a better test
+				// totally fragile. should design a better test
 				episode_count.should.equal(31); 
 				done();
 			});
@@ -49,7 +49,7 @@ describe('Kat Provider Plugin', function(){
 				torrents.push(torrent);
 			})
 			.on('end', function(){
-				// maybe a bit fragile. should design a better test
+				// totally fragile. should design a better test
 				torrents.length.should.equal(5); 
 				done();
 			});
