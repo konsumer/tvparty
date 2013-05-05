@@ -161,9 +161,9 @@ app.get('/shows', function(req, res){
 app.get('/show/:id', function(req, res){
 	var info = getShow(req.params.id);
 	info.episodes=[];
-	if (subscriptions.indexOf(req.params.id)){
-		info.subscribed = true;
-	}
+	
+	info.subscribed = subscriptions.indexOf(req.params.id) != -1;
+
 	provider.show(req.params.id)
 		.on('episode', function(episode){
 			episode.seen=false;
