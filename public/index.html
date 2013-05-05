@@ -48,6 +48,9 @@
         }else{
             $(button).removeClass('btn-inverse').addClass('btn-primary').text('subscribe');
         }
+        $.post('/subscriptions', {id:id, val:($(button).text() == 'unsubscribe')}, function(r){
+            console.log(r);
+        });
     }
 
     $(function(){
