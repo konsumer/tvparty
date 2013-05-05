@@ -70,7 +70,7 @@ exports.show = function(id){
 				name: $(el).find('.versionsEpName').text(),
 				show: id,
 				image: $('.movieCover img').attr('src'),
-				season: (season) ? parseInt(season.replace('Season ',''), 10) : '?';
+				season: (season) ? parseInt(season.replace('Season ',''), 10) : '?'
 			};
 			if ($(el).attr('onclick')){
 				episode.id = decodeURIComponent($(el).attr('onclick').match(/\d+/)[0]);
