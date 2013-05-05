@@ -163,7 +163,7 @@ app.get('/show/:id', function(req, res){
 	info.episodes=[];
 	provider.show(req.params.id)
 		.on('episode', function(episode){
-			var episode.seen=false;
+			episode.seen=false;
 			for (i in seen){
 				if (episode.id == seen[i].id){
 					episode.seen = true;
