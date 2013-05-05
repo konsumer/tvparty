@@ -5,7 +5,6 @@
     <title>TV Party</title>
     <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
     <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/black-tie/jquery-ui.css" rel="stylesheet">
     <style>
         #subscriptions label {
             padding: 10px;
@@ -25,7 +24,7 @@
         <input id="show" type="text" placeholder="Type a show name" />
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
     <script>
 
     $(function(){
@@ -34,7 +33,7 @@
             shows.forEach(function(show){
                 show_names.push(show.name);
             });
-            $( "#show" ).autocomplete({ source:show_names });
+            $('.typeahead').typeahead({source:show_names});
             $.getJSON('/subscriptions', function(subscriptions){
                 console.log('subscriptions', subscriptions);
             });
