@@ -2,9 +2,13 @@ if (!chai){ var chai = require('chai'); }
 var should = chai.should();
 
 
-var kat = require('../providers/kat.js');
+describe('Kat Provider Plugin', function(){
+	var kat;
 
-describe('Kat Provider Plugin', function(){	
+	it('should load correctly', function(){
+		kat = require('../providers/kat.js');
+	});
+
 	it('should list shows', function(done){
 		kat.all.should.be.a('function');
 		var show_count=0;
