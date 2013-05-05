@@ -1,7 +1,5 @@
 if (!chai){ var chai = require('chai'); }
-var assert = chai.assert,
-    expect = chai.expect,
-    should = chai.should();
+var should = chai.should();
 
 
 var kat = require('../providers/kat.js');
@@ -26,7 +24,6 @@ describe('Kat Provider Plugin', function(){
 		var episode_count=0;
 		kat.show('game-of-thrones-tv24493')
 			.on('episode', function(episode){
-				console.log('EPISODE', episode);
 				episode_count++;
 			})
 			.on('end', function(){
