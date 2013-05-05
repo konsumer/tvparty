@@ -161,6 +161,9 @@ app.get('/shows', function(req, res){
 app.get('/show/:id', function(req, res){
 	var info = getShow(req.params.id);
 	info.episodes=[];
+	if (subscriptions.indexOf(req.params.id)){
+		info.subscribed = true;
+	}
 	provider.show(req.params.id)
 		.on('episode', function(episode){
 			episode.seen=false;
@@ -171,7 +174,6 @@ app.get('/show/:id', function(req, res){
 				}
 			}
 			info.episodes.push(episode);
-
 			// couldn't get image from show-list, using episode-list
 			info.image = episode.image;
 		})
