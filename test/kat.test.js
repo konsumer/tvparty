@@ -49,7 +49,8 @@ describe('Kat Provider Plugin', function(){
 				torrents.push(torrent);
 			})
 			.on('end', function(){
-				console.log(torrents.length);
+				// maybe a bit fragile. should design a better test
+				torrents.length.should.equal(5); 
 				done();
 			});
 
@@ -57,6 +58,7 @@ describe('Kat Provider Plugin', function(){
 
 	it('should find best torrent', function(){
 		kat.best.should.be.a('function');
+		console.log(kat.best(torrents));
 	});
 });
 
