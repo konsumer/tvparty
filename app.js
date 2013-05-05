@@ -19,7 +19,13 @@ var provider = require('./providers/' + settings.provider + '.js');
  */
 function updateShows(){
 	shows = [];
-	provider.all().on('show', function(show){ shows.push(show); });
+	provider.all()
+		.on('show', function(show){
+			shows.push(show);
+		})
+		.on('end', function(){
+			updateSubscriptions();
+		});
 }
 
 /**
@@ -82,7 +88,6 @@ function updateSubscriptions(addPaused){
 }
 
 updateShows();
-updateSubscriptions();
 setInterval(updateSubscriptions, 60000 * settings.updateTime); // run update every N minutes
 
 
