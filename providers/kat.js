@@ -95,7 +95,7 @@ exports.torrents = function(id, callback){
 			console.log($(el).text());
 
 			var torrent = {
-				name: $('.torrentname .font12px', $(el)).text(),
+				name: $('.torrentname .font12px', this).text(),
 				link: 'http://kat.ph' + $('.torrentname .font12px', this).attr('href'),
 				magnet: $('a.imagnet', this).attr('href'),
 				size: $('td.center', this).slice(0,1).text(),
