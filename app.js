@@ -1,43 +1,100 @@
-var request = require('request'),
-	fs = require('fs'),
+var fs = require('fs'),
 	path = require('path'),
 	express = require('express'),
 	Transmission = require('transmission'),
-	cheerio = require('cheerio'),
 	settings = require('./conf/settings.json'),
 	transmission = new Transmission(settings),
 	seen = [],
-	subscriptions = [],
-	shows = require('./shows.json');
+	subscriptions = []
+	shows = [];
 
 // load optional stuff from JSON files
 try { seen = require('./conf/seen.json'); }catch(e){ console.log(e); }
 try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.log(e); }
 
-// grab RSS for all your favorite shows
-function updateSubscriptions(addPaused){
-	subscriptions.forEach(function(show){
-		request('http://showrss.karmorra.info/feeds/' + show + '.rss', function(err, res, body){
-			var $ = cheerio.load(body, {ignoreWhitespace: true, xmlMode:true});
-			$('item').each(function(i, el){
-				// TODO: something smart to parse out quality, season, episode, name, group
-				seen.push({
-					show: show,
-					title: $(this).children('title').text(),
-					torrent: $(this).children('link').text()
-				});
-			});
-		});
-	});
-	fs.writeFileSync(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen, null, 4));
+var provider = require('./providers/' + settings.provider + '.js');
+
+/**
+ * Store cache of shows in memory
+ */
+function updateShows(){
+	shows = [];
+	provider.all().on('show', function(show){ shows.push(show); });
 }
 
+/**
+ * [getShowName description]
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+function getShow(id){
+	for(i in shows){
+		if (shows[i].id == id){
+			return shows[i];
+			break;
+		}
+	}
+}
+
+/**
+ * [updateSubscriptions description]
+ * @param  {[type]} addPaused [description]
+ */
+function updateSubscriptions(addPaused){
+	subscriptions.forEach(function(show){
+		provider.show(show)
+			.on('episode', function(episode){
+				// find episode in seen list, or add it to transmission
+				if (episode.id){
+					var found=false;
+					for (i in seen){
+						if (episode.id == seen[i].id){
+							found = true;
+							break;
+						}
+					}
+					if (!found){
+						seen.push(episode);
+						var torrents = [];
+						provider.torrents(episode.id)
+							.on('torrent', function(torrent){ torrents.push(torrent); })
+							.on('end', function(){
+								var options = {
+									"download-dir": settings.add_dir + '/' + getShow(episode.show).name
+								};
+								options.paused = (addPaused === true);
+								transmission.add(provider.best(torrents).magnet, options, function(err, arg){
+									if (err) console.log(err);
+									console.log(arg);
+								});
+							});
+					}
+				}
+				
+			})
+			.on('end', function(){
+				fs.writeFile(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen, null, 4), function(){});
+			});
+
+	});
+	
+	
+}
+
+updateShows();
 updateSubscriptions();
 setInterval(updateSubscriptions, 60000 * settings.updateTime); // run update every N minutes
 
-// serve up REST API & simple demo
+
+////////////////////////
 
 var app = express();
+
+// serve demo
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+// serve up REST API
 
 app.use(express.bodyParser());
 app.use(express.logger());
@@ -47,15 +104,6 @@ app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "X-Requested-With");
         next();
-});
-
-// serve demo
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-// get list of current subscriptions
-app.get('/subscriptions', function(req, res){
-	res.send(subscriptions);
 });
 
 // set list of current subscriptions
@@ -92,6 +140,11 @@ app.post('/subscriptions', function(req, res){
 		res.send(500, { error: e });
 		console.log(e);
 	}
+});
+
+// get list of current subscriptions
+app.get('/subscriptions', function(req, res){
+	res.send(subscriptions);
 });
 
 // get list of available shows
