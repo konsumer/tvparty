@@ -12,6 +12,7 @@ describe('Kat Provider Plugin', function(){
 
 	it('should list shows', function(done){
 		kat.all.should.be.a('function');
+		
 		var show_count=0;
 		kat.all()
 			.on('show', function(show){
@@ -26,6 +27,7 @@ describe('Kat Provider Plugin', function(){
 
 	it('should list episodes', function(done){
 		kat.show.should.be.a('function');
+		
 		var episode_count=0;
 		kat.show('game-of-thrones-tv24493')
 			.on('episode', function(episode){
