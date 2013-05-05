@@ -29,12 +29,11 @@
 
     $(function(){
         $.getJSON('/shows', function(shows){
-            console.log('shows', shows);
-            $( "#show" ).autocomplete({
-                search: function( event, ui ) {
-
-                }
+            var show_names = [];
+            shows.forEach(function(show){
+                show_names.push(shaow.name);
             });
+            $( "#show" ).autocomplete({ source:show_names });
             $.getJSON('/subscriptions', function(subscriptions){
                 console.log('subscriptions', subscriptions);
             });
