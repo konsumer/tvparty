@@ -159,10 +159,10 @@ app.get('/shows', function(req, res){
 
 // get detailed info about a show
 app.get('/show/:id', function(req, res){
-	var info = {};
+	var info = getShow(req.params.id);
 	provider.show(req.params.id)
 		.on('episode', function(episode){
-			info = Object.create(getShow(req.params.id), episode);
+			info = Object.create(info, episode);
 		})
 		.on('end', function(){
 			res.send(info);
