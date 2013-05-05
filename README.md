@@ -50,3 +50,7 @@ Here is the API:
 *  `POST /subscriptions` - set a list of current TV subscriptions, using JSON
 
 I made a sweet admin at `http://{NAS_ADDRESS}:{SERVE_PORT}/` that you can use to modify your subscriptions.
+
+## Testing
+
+Run `npm test` to test the various parts of tvparty. See usage examples of the code in `test/` directory.
