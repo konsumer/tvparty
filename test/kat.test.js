@@ -5,9 +5,10 @@ var should = chai.should();
 describe('Kat Provider Plugin', function(){
 	var kat;
 
-	it('should load correctly', function(){
+	it('should load correctly', function(done){
 		kat = require('../providers/kat.js');
 		kat.should.be.an('object');
+		done();
 	});
 
 	it('should list shows', function(done){
@@ -56,9 +57,10 @@ describe('Kat Provider Plugin', function(){
 
 	});
 
-	it('should find best torrent', function(){
+	it('should find best torrent', function(done){
 		kat.best.should.be.a('function');
 		var best = kat.best(torrents);
 		best.magnet.should.equal('magnet:?xt=urn:btih:92783bf9b17744326c4b1af4e5d853262342da14&dn=game+of+thrones+s01e01+hdtv+xvid+fever+eztv&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce');
+		done();
 	});
 });
