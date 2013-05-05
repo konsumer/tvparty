@@ -2,7 +2,7 @@ if (!chai){ var chai = require('chai'); }
 var should = chai.should();
 
 
-describe('Kat Provider Plugin', function(){
+describe('Provider:Kat', function(){
 	var kat;
 
 	it('should load correctly', function(){
