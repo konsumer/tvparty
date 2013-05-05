@@ -62,6 +62,9 @@ exports.show = function(id){
 		var links = $('a.infoListCut');
 		links.each(function(i, el){
 			var season = $(el).parent().parent().parent().prev().html();
+			if (!season){
+				season = $(el).parent().parent().parent().prev().prev().html();
+			}
 
 			var episode = {
 				date: moment($(el).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').utc().unix(),
