@@ -1,5 +1,5 @@
 #!/bin/bash
-#/etc/init.d/tvparty
+# On Linux: Install this file in /etc/init.d/tvparty
 
 # set this to wherever you installed tvparty
 INSTALL_DIR="/usr/local/share/tvparty"
