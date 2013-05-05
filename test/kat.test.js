@@ -30,7 +30,8 @@ describe('Kat Provider Plugin', function(){
 				episode_count++;
 			})
 			.on('end', function(){
-				console.log('got ' + episode_count + ' episodes');
+				// maybe a bit fragile. should design a better test
+				episode_count.should.equal(31); 
 				done();
 			});
 	});
