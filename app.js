@@ -151,7 +151,16 @@ app.post('/subscriptions', function(req, res){
 app.get('/subscriptions', function(req, res){
 	var out =[];
 	subscriptions.forEach(function(id){
-		out.push(getShow(id));
+		var show = getShow(id);
+		show.episodes.sort(function(a,b){
+			return b.date-a.date;
+		})
+		.forEach(function(episode){
+			if (!show.last_episode && episode.seen){
+				show.last_episode=episode;
+			}
+		});
+		out.push(show);
 	});
 	res.send(out);
 });
