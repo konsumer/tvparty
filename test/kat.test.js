@@ -12,7 +12,7 @@ describe('Kat Provider Plugin', function(){
 	});
 	
 	it('should list shows', function(){
-		kat.all.should.be.a('function');
+		kat.all.should.be.a('array');
 	});
 
 	it('should list episodes', function(){
