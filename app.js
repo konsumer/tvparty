@@ -149,7 +149,11 @@ app.post('/subscriptions', function(req, res){
 
 // get list of current subscriptions
 app.get('/subscriptions', function(req, res){
-	res.send(subscriptions);
+	var out =[];
+	subscriptions.forEach(function(id){
+		out.push(getShow(id));
+	});
+	res.send(out);
 });
 
 // get list of available shows
@@ -161,7 +165,7 @@ app.get('/shows', function(req, res){
 app.get('/show/:id', function(req, res){
 	var info = getShow(req.params.id);
 	info.episodes=[];
-	
+
 	info.subscribed = subscriptions.indexOf(req.params.id) != -1;
 
 	provider.show(req.params.id)
