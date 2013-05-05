@@ -31,7 +31,7 @@ Set your username, password, etc. `updateTime` is how often, in minutes, to chec
 
 `add_dir` is the directory where series will be put. It tries to guess name & season from name.
 
-In the directory where these files are, run `npm install`, then `node app.js`
+In the directory where these files are, run `npm install`, then `npm start`
 
 ## Install
 
