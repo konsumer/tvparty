@@ -12,7 +12,6 @@ describe('Kat Provider Plugin', function(){
 		var show_count=0;
 		kat.all()
 			.on('show', function(show){
-				console.log('SHOW', show);
 				show_count++;
 			})
 			.on('end', function(){
