@@ -1,14 +1,26 @@
 if (!chai){ var chai = require('chai'); }
-
-// just setup the ones you use
 var assert = chai.assert,
     expect = chai.expect,
-    should = chai.should(); // Note that should has to be executed
+    should = chai.should();
 
 
-var kat=require('../providers/kat.js');
+var kat = require('../providers/kat.js');
 
+describe('Kat Provider Plugin', function(){
+	it('should list shows', function(){
 
+	});
+
+	it('should list episodes', function(){
+		
+	});
+
+	it('should list torrents', function(){
+		it('should find best torrent', function(){
+		
+		});
+	});
+});
 
 
 /*
