@@ -42,4 +42,4 @@ These are your subscriptions, by ID.  For "Game of Thrones" & "Doctor Who", it l
 
 ```
 
-You can manage these, easily, by visiting the demo-app. These are show IDs from [showRSS](http://showrss.karmorra.info/).
+You can manage these, easily, by visiting the demo-app. These are show IDs from [Kickass Torrents](http://kat.ph/tv/show/).
