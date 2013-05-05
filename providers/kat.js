@@ -64,7 +64,8 @@ exports.show = function(id){
 			var episode = {
 				date: moment($(el).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').utc().unix(),
 				number: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
-				name: $(el).find('.versionsEpName').text()
+				name: $(el).find('.versionsEpName').text(),
+				show: id
 			};
 			// TODO: get season #
 			if ($(el).attr('onclick')){
