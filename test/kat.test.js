@@ -8,17 +8,15 @@ var kat = require('../providers/kat.js');
 
 describe('Kat Provider Plugin', function(){
 	it('should list shows', function(){
-
 	});
 
 	it('should list episodes', function(){
-		
 	});
 
 	it('should list torrents', function(){
-		it('should find best torrent', function(){
-		
-		});
+	});
+
+	it('should find best torrent', function(){
 	});
 });
 
