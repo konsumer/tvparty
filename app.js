@@ -163,7 +163,16 @@ app.get('/show/:id', function(req, res){
 	info.episodes=[];
 	provider.show(req.params.id)
 		.on('episode', function(episode){
+			var episode.seen=false;
+			for (i in seen){
+				if (episode.id == seen[i].id){
+					episode.seen = true;
+					break;
+				}
+			}
 			info.episodes.push(episode);
+
+			// couldn't get image from show-list, using episode-list
 			info.image = episode.image;
 		})
 		.on('end', function(){
