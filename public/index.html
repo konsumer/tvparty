@@ -77,9 +77,9 @@
                                 }
 
                                 if (show.subscribed){
-                                    $('#info').append('<button onclick="subscribe(this, ' + show.id + ')" class="btn btn-large btn-inverse">unsubscribe</button>'); 
+                                    $('#info').append('<button onclick="subscribe(this, \'' + show.id + '\')" class="btn btn-large btn-inverse">unsubscribe</button>'); 
                                 }else{
-                                    $('#info').append('<button onclick="subscribe(this,' + show.id + ')" class="btn btn-large btn-primary">subscribe</button>'); 
+                                    $('#info').append('<button onclick="subscribe(this, \'' + show.id + '\')" class="btn btn-large btn-primary">subscribe</button>'); 
                                 }
                                 
                                 var ul = '<ul id="episodes">';
