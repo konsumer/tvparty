@@ -58,20 +58,7 @@ describe('Kat Provider Plugin', function(){
 
 	it('should find best torrent', function(){
 		kat.best.should.be.a('function');
-		console.log(kat.best(torrents));
+		var best = kat.best(torrents);
+		best.magnet.should.equal('magnet:?xt=urn:btih:92783bf9b17744326c4b1af4e5d853262342da14&dn=game+of+thrones+s01e01+hdtv+xvid+fever+eztv&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce');
 	});
 });
-
-
-/*
-
-
-kat.torrents('121148392')
-	.on('torrent', function(torrent){
-		console.log('TORRENT', torrent);
-		torrents.push(torrent);
-	})
-	.on('end', function(){
-		console.log('\nBEST', kat.best(torrents));
-	});
-*/
