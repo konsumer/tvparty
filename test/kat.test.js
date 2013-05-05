@@ -7,8 +7,10 @@ var assert = chai.assert,
 var kat = require('../providers/kat.js');
 
 describe('Kat Provider Plugin', function(){
-	kat.should.be.an('object');
-
+	it('should be loadable', function(){
+		kat.should.be.an('object');
+	});
+	
 	it('should list shows', function(){
 	});
 
