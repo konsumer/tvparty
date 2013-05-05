@@ -41,7 +41,6 @@ exports.all = function(){
 				url:  'http://kat.ph' + $(el).attr('href'),
 				source: 'kat'
 			};
-			show.image = 'http://yuq.me/tv/' + show.id.match(/-tv([0-9]+)/)[1] + '.png';
 			emitter.emit('show', show);
 			if (i == links.length-1){
 				emitter.emit('end');
