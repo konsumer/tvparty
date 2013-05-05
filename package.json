@@ -9,7 +9,8 @@
 		"moment":""
 	},
 	"devDependencies": {
-		"forever": ""
+		"forever": "",
+		"mocha": ""
 	},
 	"scripts":{
 		"test": "mocha --reporter spec test/*.test.js"
