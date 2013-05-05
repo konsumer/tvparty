@@ -39,7 +39,7 @@ exports.all = function(){
 				id: decodeURIComponent($(el).attr('href').replace(/\//g,'')),
 				name: $(el).text(),
 				url:  'http://kat.ph' + $(el).attr('href'),
-				img: 'http://yuq.me/tv/' + id.match(/tv([0-9]+)/)[0] + '.png',
+				img: 'http://yuq.me/tv/' + show.id.match(/tv([0-9]+)/)[0] + '.png',
 				source: 'kat'
 			};
 			emitter.emit('show', show);
