@@ -60,7 +60,7 @@
                                 var ul = '<ul id="episodes">';
                                 show.episodes.forEach(function(episode){
                                     if (episode.seen){
-                                        ul += '<li class="seen">' + episode.number + ': ' + episode.name+'</li>';
+                                        ul += '<li class="seen">' + episode.season + '-' + episode.number + ': ' + episode.name+'</li>';
                                     }else{
                                         ul += '<li>' + episode.number + ': ' + episode.name+'</li>';
                                     }
