@@ -7,6 +7,8 @@ var assert = chai.assert,
 var kat = require('../providers/kat.js');
 
 describe('Kat Provider Plugin', function(){
+	kat.should.be.a('function');
+
 	it('should list shows', function(){
 	});
 
