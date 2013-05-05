@@ -57,6 +57,7 @@ describe('Provider:Kat', function(){
 	it('should find best torrent', function(){
 		kat.best.should.be.a('function');
 		var best = kat.best(torrents);
+		// pretty fragile...
 		best.magnet.should.equal('magnet:?xt=urn:btih:92783bf9b17744326c4b1af4e5d853262342da14&dn=game+of+thrones+s01e01+hdtv+xvid+fever+eztv&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce');
 	});
 });
