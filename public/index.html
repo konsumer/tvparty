@@ -31,7 +31,7 @@
         $.getJSON('/shows', function(shows){
             var show_names = [];
             shows.forEach(function(show){
-                show_names.push(shaow.name);
+                show_names.push(show.name);
             });
             $( "#show" ).autocomplete({ source:show_names });
             $.getJSON('/subscriptions', function(subscriptions){
