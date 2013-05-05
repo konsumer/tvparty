@@ -64,9 +64,9 @@
                                 }
 
                                 if (show.subscribed){
-                                    $('#info').append('<button onclick="unsubscribe(' + show.id + ')" class="btn btn-large inverse">unsubscribe</button>'); 
+                                    $('#info').append('<button onclick="subscribe(this, ' + show.id + ')" class="btn btn-large inverse">unsubscribe</button>'); 
                                 }else{
-                                    $('#info').append('<button onclick="subscribe(' + show.id + ')" class="btn btn-large primary">subscribe</button>'); 
+                                    $('#info').append('<button onclick="subscribe(this,' + show.id + ')" class="btn btn-large primary">subscribe</button>'); 
                                 }
                                 
                                 var ul = '<ul id="episodes">';
