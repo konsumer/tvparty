@@ -65,7 +65,8 @@ exports.show = function(id){
 				date: moment($(el).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').utc().unix(),
 				number: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
 				name: $(el).find('.versionsEpName').text(),
-				show: id
+				show: id,
+				image: $('.movieCover img').attr('src')
 			};
 			// TODO: get season #
 			if ($(el).attr('onclick')){
