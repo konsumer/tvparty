@@ -58,14 +58,17 @@
                             $.getJSON('/show/' + shows[i].id, function(show){
                                 console.log('show', show);
                                 $('#info').html('<h2><a href="' + show.url + '">' + show.name + '</a></h2>');
+                                
+                                if (show.image){
+                                    $('#info').append('<img src="'+show.image+'">');
+                                }
+
                                 if (show.subscribed){
                                     $('#info').append('<button onclick="unsubscribe(' + show.id + ')" class="btn warning">unsubscribe</button>'); 
                                 }else{
                                     $('#info').append('<button onclick="subscribe(' + show.id + ')" class="btn primary">subscribe</button>'); 
                                 }
-                                if (show.image){
-                                    $('#info').append('<img src="'+show.image+'">');
-                                }
+                                
                                 var ul = '<ul id="episodes">';
                                 var classes=[];
                                 show.episodes.forEach(function(episode){
