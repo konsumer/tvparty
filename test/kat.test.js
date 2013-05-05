@@ -47,7 +47,7 @@ describe('Kat Provider Plugin', function(){
 		kat.torrents('121148392')
 			.on('torrent', function(torrent){
 				torrents.push(torrent);
-			});
+			})
 			.on('end', function(){
 				console.log(torrents.length);
 				done();
