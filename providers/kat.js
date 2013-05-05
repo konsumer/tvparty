@@ -95,11 +95,11 @@ exports.torrents = function(id, callback){
 			console.log($(el).text());
 
 			var torrent = {
-				name: $('.torrentname .font12px', $(el)).text(),
-				link: 'http://kat.ph' + $('.torrentname .font12px', $(el)).attr('href'),
-				magnet: $('a.imagnet', $(el)).attr('href'),
-				size: $('td.center', $(el)).slice(0,1).text(),
-				seed: $('td.center', $(el)).slice(3,4).text(),
+				name: $(el).find('.torrentname .font12px').text(),
+				link: 'http://kat.ph' + $(el).find('.torrentname .font12px').attr('href'),
+				magnet: $(el).find('a.imagnet').attr('href'),
+				size: $(el).find('td.center').eq(0).text(),
+				seed: $(el).find('td.center').eq(1).text(),
 			};
 
 			// normalize
