@@ -160,11 +160,12 @@ app.get('/shows', function(req, res){
 // get detailed info about a show
 app.get('/show/:id', function(req, res){
 	var info = getShow(req.params.id);
-	console.log(info);
+	info.episodes=[];
 	provider.show(req.params.id)
 		.on('episode', function(episode){
 			console.log(episode);
-			info = Object.create(info, episode);
+			info.episodes.push(episode);
+			info.image = episode.image;
 		})
 		.on('end', function(){
 			res.send(info);
