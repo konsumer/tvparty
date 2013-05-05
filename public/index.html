@@ -38,6 +38,7 @@
                     return show_names;
                 },
                 updater:function(item){
+                    console.log(item);
                     return item;
                 } });
             $.getJSON('/subscriptions', function(subscriptions){
