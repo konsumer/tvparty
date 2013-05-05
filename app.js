@@ -163,6 +163,7 @@ app.get('/show/:id', function(req, res){
 	console.log(info);
 	provider.show(req.params.id)
 		.on('episode', function(episode){
+			console.log(episode);
 			info = Object.create(info, episode);
 		})
 		.on('end', function(){
