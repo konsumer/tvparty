@@ -7,8 +7,18 @@ var assert = chai.assert,
 var kat = require('../providers/kat.js');
 
 describe('Kat Provider Plugin', function(){	
-	it('should list shows', function(){
+	it('should list shows', function(done){
 		kat.all.should.be.a('function');
+		var show_count=0;
+		kat.all()
+			.on('show', function(show){
+				console.log('SHOW', show);
+				show_count++;
+			})
+			.on('end', function(){
+				console.log(show_count);
+				done();
+			});
 	});
 
 	it('should list episodes', function(){
@@ -27,15 +37,7 @@ describe('Kat Provider Plugin', function(){
 
 /*
 
-var show_count=0;
-kat.all()
-	.on('show', function(show){
-		console.log('SHOW', show);
-		show_count++;
-	})
-	.on('end', function(){
-		console.log('got ' + show_count + ' shows');
-	});
+
 
 var episode_count=0;
 kat.show('game-of-thrones-tv24493')
