@@ -61,13 +61,16 @@ exports.show = function(id){
 	get('http://kat.ph/' + id + '/', function($){
 		var links = $('a.infoListCut');
 		links.each(function(i, el){
+			var season = $(el).parent().parent().parent().prev().html();
+			if (season)
+
 			var episode = {
 				date: moment($(el).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').utc().unix(),
 				number: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
 				name: $(el).find('.versionsEpName').text(),
 				show: id,
 				image: $('.movieCover img').attr('src'),
-				season: '?' // TODO!
+				season: parseInt(season, 10)
 			};
 			if ($(el).attr('onclick')){
 				episode.id = decodeURIComponent($(el).attr('onclick').match(/\d+/)[0]);
