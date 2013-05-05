@@ -20,9 +20,14 @@
             color: red;
         }
 
-        #episodes .seen {
+        #episodes .available {
             color: green;
         }
+
+        #episodes .seen {
+            background: #ccc;
+        }
+
 
     </style>
 </head>
@@ -58,14 +63,13 @@
                                 }
 
                                 var ul = '<ul id="episodes">';
+                                var classes=[];
                                 show.episodes.forEach(function(episode){
                                     var text = episode.season + '-' + episode.number + ': ' + episode.name;
-                                    if (episode.seen){
-                                        ul += '<li class="seen">' + text +'</li>';
-                                    }else{
-                                        ul += '<li>' + text +'</li>';
-                                    }
-                                    
+                                    if (episode.seen) classes.push('seen');
+                                    if (episode.has_torrents) classes.push('available');
+
+                                    ul += (classes.length > 0) ? '<li class="' + classes.join(" ") + '">' + text +'</li>' : '<li>' + text +'</li>';                                  
                                 });
                                 $('#info').append(ul);
                             });
