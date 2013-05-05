@@ -29,12 +29,12 @@
 
     $(function(){
         $.getJSON('/shows', function(shows){
-            var show_names = [];
-            shows.forEach(function(show){
-                show_names.push(show.name);
-            });
-            $('#show').typeahead({source:show_names, matcher:function(query){
-                console.log(query);
+            $('#show').typeahead({source:function(){
+                var show_names = [];
+                shows.forEach(function(show){
+                    show_names.push(show.name);
+                });
+                return show_names;
             } });
             $.getJSON('/subscriptions', function(subscriptions){
                 console.log('subscriptions', subscriptions);
