@@ -48,7 +48,6 @@ describe('Provider:Kat', function(){
 			})
 			.on('end', function(){
 				torrents.length.should.be.above(1);
-				console.log(torrents);
 				done();
 			});
 
