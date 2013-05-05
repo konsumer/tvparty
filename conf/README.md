@@ -36,8 +36,8 @@ These are your subscriptions, by ID.  For "Game of Thrones" & "Doctor Who", it l
 ```json
 
 [
-	350,
-	103
+	"game-of-thrones-tv24493",
+    "doctor-who-(2005)-tv3332"
 ]
 
 ```
