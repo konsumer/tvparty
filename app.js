@@ -51,7 +51,7 @@ function updateSubscriptions(addPaused){
 		provider.show(show)
 			.on('episode', function(episode){
 				// find episode in seen list, or add it to transmission
-				if (episode.id){
+				if (episode.id && episode.has_torrents){
 					var found=false;
 					for (i in seen){
 						if (episode.id == seen[i].id){
