@@ -152,5 +152,10 @@ app.get('/shows', function(req, res){
 	res.send(shows);
 });
 
+// get list of episodes that have been processed
+app.get('/seen', function(req, res){
+	res.send(seen);
+});
+
 app.listen(settings.serve_port);
 console.log('Listening on http://0.0.0.0:' + settings.serve_port);
