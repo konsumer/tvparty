@@ -19,8 +19,7 @@ describe('Provider:Kat', function(){
 				show_count++;
 			})
 			.on('end', function(){
-				// totally fragile. should design a better test
-				show_count.should.equal(7174); 
+				show_count.should.be.above(50);
 				done();
 			});
 	});
@@ -34,8 +33,7 @@ describe('Provider:Kat', function(){
 				episode_count++;
 			})
 			.on('end', function(){
-				// totally fragile. should design a better test
-				episode_count.should.be.greater.than(2); 
+				episode_count.should.be.above(5); 
 				done();
 			});
 	});
@@ -49,8 +47,7 @@ describe('Provider:Kat', function(){
 				torrents.push(torrent);
 			})
 			.on('end', function(){
-				// totally fragile. should design a better test
-				torrents.length.should.equal(5);
+				torrents.length.should.be.above(1);
 				console.log(torrents);
 				done();
 			});
