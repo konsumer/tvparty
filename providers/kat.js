@@ -36,7 +36,7 @@ exports.all = function(){
 		var links = $('ul.textcontent a.plain');
 		links.each(function(i, el){
 			var show = {
-				id: $(el).attr('href').replace(/\//g,''),
+				id: decodeURIComponent($(el).attr('href').replace(/\//g,'')),
 				name: $(el).text(),
 				url:  'http://kat.ph' + $(el).attr('href'),
 				source: 'kat'
@@ -69,7 +69,7 @@ exports.show = function(id){
 			};
 			// TODO: get season #
 			if ($(el).attr('onclick')){
-				episode.id = $(el).attr('onclick').match(/\d+/)[0];
+				episode.id = decodeURIComponent($(el).attr('onclick').match(/\d+/)[0]);
 				episode.has_torrents = true;
 			}else{
 				episode.has_torrents = false;
