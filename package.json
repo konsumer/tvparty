@@ -10,7 +10,8 @@
 	},
 	"devDependencies": {
 		"forever": "",
-		"mocha": ""
+		"mocha": "",
+		"chai": ""
 	},
 	"scripts":{
 		"test": "mocha --reporter spec test/*.test.js"
