@@ -86,9 +86,8 @@ exports.show = function(id){
  * Get list of torrents for an episode
  * 
  * @param  {String}   id       The ID from show()
- * @param  {Function} callback called on lll torrents for this show
  */
-exports.torrents = function(id, callback){
+exports.torrents = function(id){
 	var emitter = new events.EventEmitter();
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
 		var rows = $('tr.odd, tr.even');
