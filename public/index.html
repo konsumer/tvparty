@@ -22,6 +22,7 @@
     <div class="container">
         <h1>tvparty</h1>
         <input id="show" type="text" placeholder="Type a show name" />
+        <div id="info"></div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-typeahead.js"></script>
@@ -38,7 +39,12 @@
                     return show_names;
                 },
                 updater:function(item){
-                    console.log(item);
+                    for (var i in shows){
+                        if (shows[i].name == item){
+                            $('#info').html(JSON.stringify(shows[i]));
+                            break;
+                        }
+                    }
                     return item;
                 } });
             $.getJSON('/subscriptions', function(subscriptions){
