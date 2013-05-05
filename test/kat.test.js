@@ -15,13 +15,24 @@ describe('Kat Provider Plugin', function(){
 				show_count++;
 			})
 			.on('end', function(){
-				console.log(show_count);
+				// maybe a bit fragile. should design a better test
+				show_count.should.equal(7174); 
 				done();
 			});
 	});
 
-	it('should list episodes', function(){
+	it('should list episodes', function(done){
 		kat.show.should.be.a('function');
+		var episode_count=0;
+		kat.show('game-of-thrones-tv24493')
+			.on('episode', function(episode){
+				console.log('EPISODE', episode);
+				episode_count++;
+			})
+			.on('end', function(){
+				console.log('got ' + episode_count + ' episodes');
+				done();
+			});
 	});
 
 	it('should list torrents', function(){
@@ -36,20 +47,6 @@ describe('Kat Provider Plugin', function(){
 
 /*
 
-
-
-var episode_count=0;
-kat.show('game-of-thrones-tv24493')
-	.on('episode', function(episode){
-		console.log('EPISODE', episode);
-		episode_count++;
-	})
-	.on('end', function(){
-		console.log('got ' + episode_count + ' episodes');
-	});
-
-*/
-
 var torrents = [];
 kat.torrents('121148392')
 	.on('torrent', function(torrent){
@@ -59,3 +56,4 @@ kat.torrents('121148392')
 	.on('end', function(){
 		console.log('\nBEST', kat.best(torrents));
 	});
+*/
