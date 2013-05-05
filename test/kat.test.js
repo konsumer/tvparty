@@ -6,22 +6,21 @@ var assert = chai.assert,
 
 var kat = require('../providers/kat.js');
 
-describe('Kat Provider Plugin', function(){
-	it('should be loadable', function(){
-		kat.should.be.an('object');
-	});
-	
+describe('Kat Provider Plugin', function(){	
 	it('should list shows', function(){
-		kat.all.should.be.a('array');
+		kat.all.should.be.a('function');
 	});
 
 	it('should list episodes', function(){
+		kat.show.should.be.a('function');
 	});
 
 	it('should list torrents', function(){
+		kat.torrents.should.be.a('function');
 	});
 
 	it('should find best torrent', function(){
+		kat.best.should.be.a('function');
 	});
 });
 
