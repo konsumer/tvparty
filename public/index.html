@@ -41,7 +41,7 @@
                 updater:function(item){
                     for (var i in shows){
                         if (shows[i].name == item){
-                            $('#info').html(JSON.stringify(shows[i]));
+                            $('#info').html('<h3>'+shows[i].name+'</h3><img src="'+shows[i].image+'"/>');
                             break;
                         }
                     }
