@@ -46,6 +46,12 @@
                                 if (show.image){
                                     $('#info').append('<img src="'+show.image+'">');
                                 }
+
+                                var ul = '<ul id="episodes">';
+                                show.episodes.forEach(function(episode){
+                                    ul += '<li>' + episode.number + ': ' + episode.name+'</li>'
+                                });
+                                $('#info').append(ul);
                             });
                             break;
                         }
