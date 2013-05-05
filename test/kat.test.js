@@ -38,8 +38,19 @@ describe('Kat Provider Plugin', function(){
 			});
 	});
 
-	it('should list torrents', function(){
+	var torrents = [];
+	it('should list torrents', function(done){
 		kat.torrents.should.be.a('function');
+		
+		kat.torrents('121148392')
+			.on('torrent', function(torrent){
+				torrents.push(torrent);
+			});
+			.on('end', function(){
+				console.log(torrents.length);
+				done();
+			});
+
 	});
 
 	it('should find best torrent', function(){
@@ -50,7 +61,7 @@ describe('Kat Provider Plugin', function(){
 
 /*
 
-var torrents = [];
+
 kat.torrents('121148392')
 	.on('torrent', function(torrent){
 		console.log('TORRENT', torrent);
