@@ -163,7 +163,6 @@ app.get('/show/:id', function(req, res){
 	info.episodes=[];
 	provider.show(req.params.id)
 		.on('episode', function(episode){
-			console.log(episode);
 			info.episodes.push(episode);
 			info.image = episode.image;
 		})
