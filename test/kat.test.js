@@ -58,6 +58,6 @@ describe('Provider:Kat', function(){
 		kat.best.should.be.a('function');
 		var best = kat.best(torrents);
 		// pretty fragile...
-		best.magnet.should.equal('magnet:?xt=urn:btih:92783bf9b17744326c4b1af4e5d853262342da14&dn=game+of+thrones+s01e01+hdtv+xvid+fever+eztv&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce');
+		best.magnet.should.equal('magnet:?xt=urn:btih:1b3513452662898320af82d65dc56df7966efd65&dn=game+of+thrones+s01e01+swesub+hdtv+xvid+b2b4u&tr=http%3A%2F%2Finferno.demonoid.me%3A3419%2Fannounce');
 	});
 });
