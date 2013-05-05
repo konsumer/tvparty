@@ -10,7 +10,7 @@ describe('Kat Provider Plugin', function(){
 		kat.should.be.an('object');
 	});
 
-	it('should list shows', function(done){
+	it('should list all shows', function(done){
 		kat.all.should.be.a('function');
 		
 		var show_count=0;
