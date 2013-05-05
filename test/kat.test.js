@@ -50,7 +50,8 @@ describe('Kat Provider Plugin', function(){
 			})
 			.on('end', function(){
 				// totally fragile. should design a better test
-				torrents.length.should.equal(5); 
+				torrents.length.should.equal(5);
+				console.log(torrents);
 				done();
 			});
 
