@@ -7,6 +7,7 @@ describe('Kat Provider Plugin', function(){
 
 	it('should load correctly', function(){
 		kat = require('../providers/kat.js');
+		kat.should.be.an('object');
 	});
 
 	it('should list shows', function(done){
