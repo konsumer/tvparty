@@ -66,9 +66,9 @@ exports.show = function(id){
 				number: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
 				name: $(el).find('.versionsEpName').text(),
 				show: id,
-				image: $('.movieCover img').attr('src')
+				image: $('.movieCover img').attr('src'),
+				season: '?' // TODO!
 			};
-			// TODO: get season #
 			if ($(el).attr('onclick')){
 				episode.id = decodeURIComponent($(el).attr('onclick').match(/\d+/)[0]);
 				episode.has_torrents = true;
