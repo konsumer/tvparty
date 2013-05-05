@@ -10,5 +10,8 @@
 	},
 	"devDependencies": {
 		"forever": ""
+	},
+	"scripts":{
+		"test": "mocha --reporter spec test/*.test.js"
 	}
 }
