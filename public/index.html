@@ -51,7 +51,7 @@
                     for (var i in shows){
                         if (shows[i].name == item){
                             $.getJSON('/show/' + shows[i].id, function(show){
-                                console.log('shows', show);
+                                console.log('show', show);
                                 $('#info').html('<h2><a href="' + show.url + '">' + show.name + '</a></h2>');
                                 if (show.image){
                                     $('#info').append('<img src="'+show.image+'">');
