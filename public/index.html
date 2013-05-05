@@ -27,7 +27,10 @@
 
     $(function(){
         $.getJSON('/shows', function(shows){
-            console.log(shows);
+            console.log('shows', shows);
+            $.getJSON('/subscriptions', function(subscriptions){
+                console.log('subscriptions', subscriptions);
+            });
         });
     });
 
