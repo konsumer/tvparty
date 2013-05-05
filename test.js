@@ -1,4 +1,15 @@
-var kat=require('./providers/kat.js');
+if (!chai){ var chai = require('chai'); }
+
+// just setup the ones you use
+var assert = chai.assert,
+    expect = chai.expect,
+    should = chai.should(); // Note that should has to be executed
+
+
+var kat=require('../providers/kat.js');
+
+
+
 
 /*
 
