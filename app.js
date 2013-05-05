@@ -157,9 +157,16 @@ app.get('/shows', function(req, res){
 	res.send(shows);
 });
 
-// get list of episodes that have been processed
-app.get('/seen', function(req, res){
-	res.send(seen);
+// get detailed info about a show
+app.get('/show/:id', function(req, res){
+	var info {};
+	provider.show(req.params.id)
+		.on('episode', function(episode){
+			info = Object.create(getShow(id), episode);
+		})
+		.on('end', function(){
+			res.send(info);
+		});
 });
 
 app.listen(settings.serve_port);
