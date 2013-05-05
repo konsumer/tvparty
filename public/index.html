@@ -29,13 +29,17 @@
 
     $(function(){
         $.getJSON('/shows', function(shows){
-            $('#show').typeahead({source:function(){
-                var show_names = [];
-                shows.forEach(function(show){
-                    show_names.push(show.name);
-                });
-                return show_names;
-            } });
+            $('#show').typeahead({
+                source:function(){
+                    var show_names = [];
+                    shows.forEach(function(show){
+                        show_names.push(show.name);
+                    });
+                    return show_names;
+                },
+                updater:function(item){
+                    return item;
+                } });
             $.getJSON('/subscriptions', function(subscriptions){
                 console.log('subscriptions', subscriptions);
             });
