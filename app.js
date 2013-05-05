@@ -162,7 +162,7 @@ app.get('/show/:id', function(req, res){
 	var info = {};
 	provider.show(req.params.id)
 		.on('episode', function(episode){
-			info = Object.create(getShow(id), episode);
+			info = Object.create(getShow(req.params.id), episode);
 		})
 		.on('end', function(){
 			res.send(info);
