@@ -19,7 +19,7 @@ describe('Kat Provider Plugin', function(){
 				show_count++;
 			})
 			.on('end', function(){
-				// maybe a bit fragile. should design a better test
+				// totally fragile. should design a better test
 				show_count.should.equal(7174); 
 				done();
 			});
