@@ -92,8 +92,6 @@ exports.torrents = function(id, callback){
 	get('http://kat.ph/media/getepisode/' + id + '/', function($){
 		var rows = $('tr.odd, tr.even');
 		rows.each(function(i, el){
-			console.log($(el).text());
-
 			var torrent = {
 				name: $(el).find('.torrentname .font12px').text(),
 				link: 'http://kat.ph' + $(el).find('.torrentname .font12px').attr('href'),
