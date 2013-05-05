@@ -59,10 +59,11 @@
 
                                 var ul = '<ul id="episodes">';
                                 show.episodes.forEach(function(episode){
+                                    var text = episode.season + '-' + episode.number + ': ' + episode.name;
                                     if (episode.seen){
-                                        ul += '<li class="seen">' + episode.season + '-' + episode.number + ': ' + episode.name+'</li>';
+                                        ul += '<li class="seen">' + text +'</li>';
                                     }else{
-                                        ul += '<li>' + episode.number + ': ' + episode.name+'</li>';
+                                        ul += '<li>' + text +'</li>';
                                     }
                                     
                                 });
