@@ -20,6 +20,7 @@
 </head>
 <body>
     <div class="container">
+        <h2>Type a show to see it's status, or subscribe</h2>
         <input id="show" type="text" placeholder="Type the show" />
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -29,6 +30,11 @@
     $(function(){
         $.getJSON('/shows', function(shows){
             console.log('shows', shows);
+            $( "#show" ).autocomplete({
+                search: function( event, ui ) {
+
+                }
+            });
             $.getJSON('/subscriptions', function(subscriptions){
                 console.log('subscriptions', subscriptions);
             });
