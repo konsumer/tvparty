@@ -2,64 +2,45 @@ var fs = require('fs'),
 	path = require('path'),
 	express = require('express'),
 	Transmission = require('transmission'),
+	clone = require('clone'),
+	events = require('events'),
 	settings = require('./conf/settings.json'),
 	transmission = new Transmission(settings),
-	seen = [],
+	provider = require('./providers/' + settings.provider + '.js'),
+	seen = {},
 	subscriptions = []
 	shows = [];
 
-// load optional stuff from JSON files
+// load optional stuff from JSON files, log if they are missing
 try { seen = require('./conf/seen.json'); }catch(e){ console.log(e); }
 try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.log(e); }
 
-var provider = require('./providers/' + settings.provider + '.js');
-
 /**
- * Store cache of shows in memory
- */
-function updateShows(){
-	shows = [];
-	provider.all()
-		.on('show', function(show){
-			shows.push(show);
-		})
-		.on('end', function(){
-			updateSubscriptions();
-		});
-}
-
-/**
- * [getShowName description]
- * @param  {[type]} id [description]
- * @return {[type]}    [description]
+ * Get basic show info, by ID
+ * @param  {String} id Show identifier
+ * @return {Object}    Copy of show
  */
 function getShow(id){
 	for(i in shows){
 		if (shows[i].id == id){
-			return shows[i];
+			return clone(shows[i]);
 		}
 	}
 }
 
 /**
- * [updateSubscriptions description]
- * @param  {[type]} addPaused [description]
+ * Update subscriptions, add torrents for new shows
+ * @param  {Boolean} addPaused Add the torrent paused
  */
-function updateSubscriptions(addPaused){
-	subscriptions.forEach(function(show){
-		provider.show(show)
+function updateSubscriptions(ignore, addPaused){
+	subscriptions.forEach(function(id){
+		var show = getShow(id);
+		if (!show) return;
+		provider.show(id)
 			.on('episode', function(episode){
-				// find episode in seen list, or add it to transmission
-				if (episode.id && episode.has_torrents){
-					var found=false;
-					for (i in seen){
-						if (episode.id == seen[i].id){
-							found = true;
-							break;
-						}
-					}
-					if (!found){
-						seen.push(episode);
+				if (episode.id && episode.has_torrents && !seen[show.id + '/' + episode.id]){
+					seen[show.id + '/' + episode.id] = episode;
+					if (!ignore){
 						var torrents = [];
 						provider.torrents(episode.id)
 							.on('torrent', function(torrent){ torrents.push(torrent); })
@@ -68,25 +49,33 @@ function updateSubscriptions(addPaused){
 									"download-dir": settings.add_dir + '/' + getShow(episode.show).name
 								};
 								options.paused = (addPaused === true);
-								transmission.add(provider.best(torrents).magnet, options, function(err, arg){
-									if (err) console.log(err);
-									console.log(arg);
-								});
+								transmission.add(provider.best(torrents).magnet, options, function(err, result){if (result) console.log('added', result.name) });
 							});
 					}
 				}
-				
 			})
 			.on('end', function(){
-				fs.writeFile(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen, null, 4), function(){});
+				fs.writeFile(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen), function(){});
 			});
-
 	});
 }
 
-updateShows();
-setInterval(updateSubscriptions, 60000 * settings.updateTime); // run update every N minutes
+// just log transmission errors
+transmission.on('error', function(err){
+	console.log(err);
+});
 
+// update show-cache
+provider.all()
+	.on('show', function(show){
+		shows.push(show);
+	})
+	.on('end', function(){
+		updateSubscriptions();
+	});
+
+// run update/torrent-add every N minutes
+setInterval(updateSubscriptions, 60000 * settings.updateTime);
 
 ////////////////////////
 
@@ -108,50 +97,35 @@ app.use(function(req, res, next) {
         next();
 });
 
-// set list of current subscriptions
+// set status of a subscription
 app.post('/subscriptions', function(req, res){
-	var old_subscriptions = subscriptions.slice();
-
-	try{		
-		// find entry with same id, remove it
-		for (i in subscriptions){
-			if (req.body.id == subscriptions[i]){
-				subscriptions.splice(i,1);
-				break;
-			}
-		}
-
-		// add it back, if it's checked
-		if (req.body.val && req.body.val != 'false'){
+	var i = subscriptions.indexOf(req.body.id);
+	if (req.body.val){
+		if (i == -1){
 			subscriptions.push(req.body.id);
 		}
-
-		// save it, and update
-		if (old_subscriptions != subscriptions){
-			fs.writeFile(path.join(__dirname, 'conf', 'subscriptions.json'), JSON.stringify(subscriptions, null, 4), function(err) {
-				if(err){
-					res.send(500, { error: "Could not save subscription file." });
-				}else{
-					res.send(subscriptions);
-				}
-			});
-			// add subscriptions paused
-			updateSubscriptions(true);
+	}else{
+		if (i != -1){
+			delete(subscriptions[i]);
 		}
-	}catch(e){
-		res.send(500, { error: e });
-		console.log(e);
 	}
+	
+	// add subscriptions to seen, but not to transmission
+	updateSubscriptions(true);
+
+	// save subscriptions
+	fs.writeFile(path.join(__dirname, 'conf', 'subscriptions.json'), JSON.stringify(subscriptions), function(err) {
+		if(err){
+			res.send(500, { error: "Could not save subscription file." });
+		}else{
+			res.send(subscriptions);
+		}
+	});
 });
 
 // get list of current subscriptions
 app.get('/subscriptions', function(req, res){
-	var out =[];
-	subscriptions.forEach(function(id){
-		var show = getShow(id);
-		out.push(show);
-	});
-	res.send(out);
+	res.send(subscriptions);
 });
 
 // get list of available shows
@@ -163,18 +137,10 @@ app.get('/shows', function(req, res){
 app.get('/show/:id', function(req, res){
 	var info = getShow(req.params.id);
 	info.episodes=[];
-
 	info.subscribed = subscriptions.indexOf(req.params.id) != -1;
-
 	provider.show(req.params.id)
 		.on('episode', function(episode){
-			episode.seen=false;
-			for (i in seen){
-				if (episode.id == seen[i].id){
-					episode.seen = true;
-					break;
-				}
-			}
+			episode.seen = (seen[req.params.id + '/' + episode.id]) ? true : false;
 			info.episodes.push(episode);
 			// couldn't get image from show-list, using episode-list
 			info.image = episode.image;
@@ -186,3 +152,4 @@ app.get('/show/:id', function(req, res){
 
 app.listen(settings.serve_port);
 console.log('Listening on http://0.0.0.0:' + settings.serve_port);
+
