@@ -6,7 +6,8 @@
 		"express": "",
 		"connect": "",
 		"transmission": "",
-		"moment":""
+		"moment":"",
+		"clone":""
 	},
 	"devDependencies": {
 		"forever": "",
