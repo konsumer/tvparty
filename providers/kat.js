@@ -72,7 +72,8 @@ exports.show = function(id){
 				image: $('.movieCover img').attr('src'),
 				season: (season) ? parseInt(season.replace('Season ',''), 10) : '?'
 			};
-			if ($(el).attr('onclick')){
+			// sometimes it hasn't aired, but it is marked that it has torrents...
+			if ($(el).attr('onclick') && episode.date < moment().utc().unix()){
 				episode.id = decodeURIComponent($(el).attr('onclick').match(/\d+/)[0]);
 				episode.has_torrents = true;
 			}else{
