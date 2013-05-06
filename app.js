@@ -36,7 +36,11 @@ function updateShows(){
 function getShow(id){
 	for(i in shows){
 		if (shows[i].id == id){
-			return shows[i];
+			shows[i].episodes=[];
+			provider.show(show)
+				.on('episode', function(episode){
+					shows[i].episodes.push(episode);
+				});
 			break;
 		}
 	}
@@ -83,8 +87,6 @@ function updateSubscriptions(addPaused){
 			});
 
 	});
-	
-	
 }
 
 updateShows();
