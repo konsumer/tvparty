@@ -36,12 +36,7 @@ function updateShows(){
 function getShow(id){
 	for(i in shows){
 		if (shows[i].id == id){
-			shows[i].episodes=[];
-			provider.show(show)
-				.on('episode', function(episode){
-					shows[i].episodes.push(episode);
-				});
-			break;
+			return shows[i];
 		}
 	}
 }
