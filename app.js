@@ -101,13 +101,9 @@ app.use(function(req, res, next) {
 app.post('/subscriptions', function(req, res){
 	var i = subscriptions.indexOf(req.body.id);
 	if (req.body.val){
-		if (i == -1){
-			subscriptions.push(req.body.id);
-		}
+		if (i == -1) subscriptions.push(req.body.id);
 	}else{
-		if (i != -1){
-			delete(subscriptions[i]);
-		}
+		if (i != -1) delete(subscriptions[i]);
 	}
 	
 	// add subscriptions to seen, but not to transmission
