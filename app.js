@@ -46,7 +46,7 @@ function updateSubscriptions(ignore, addPaused){
 							.on('torrent', function(torrent){ torrents.push(torrent); })
 							.on('end', function(){
 								var options = {
-									"download-dir": settings.add_dir + '/series/' + episode.season + '/' + getShow(episode.show).name
+									"download-dir": settings.add_dir + '/series ' + episode.season + '/' + getShow(episode.show).name
 								};
 								options.paused = (addPaused === true);
 								transmission.add(provider.best(torrents).magnet, options, function(err, result){if (result) console.log('added', result.name) });
