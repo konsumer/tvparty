@@ -55,7 +55,7 @@ function updateSubscriptions(ignore, addPaused){
 				}
 			})
 			.on('end', function(){
-				fs.writeFile(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen), function(){});
+				fs.writeFile(path.join(__dirname, 'conf', 'seen.json'), JSON.stringify(seen), function(err){});
 			});
 	});
 }
