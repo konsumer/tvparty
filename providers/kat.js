@@ -32,13 +32,13 @@ var get = function(u, callback){
 */
 exports.all = function(){
 	var emitter = new events.EventEmitter();
-	get('http://kat.ph/tv/show/', function($){
+	get('http://kickass.to/tv/show/', function($){
 		var links = $('ul.textcontent a.plain');
 		links.each(function(i, el){
 			var show = {
 				id: decodeURIComponent($(el).attr('href').replace(/\//g,'')),
 				name: $(el).text(),
-				url:  'http://kat.ph' + $(el).attr('href'),
+				url:  'http://kickass.to/' + $(el).attr('href'),
 				source: 'kat'
 			};
 			emitter.emit('show', show);
@@ -58,7 +58,7 @@ exports.all = function(){
  */
 exports.show = function(id){
 	var emitter = new events.EventEmitter();
-	get('http://kat.ph/' + id + '/', function($){
+	get('http://kickass.to/' + id + '/', function($){
 		var links = $('a.infoListCut');
 		links.each(function(i, el){
 			var season = $(el).parent().parent().parent().prev().html();
@@ -95,12 +95,12 @@ exports.show = function(id){
  */
 exports.torrents = function(id){
 	var emitter = new events.EventEmitter();
-	get('http://kat.ph/media/getepisode/' + id + '/', function($){
+	get('http://kickass.to/media/getepisode/' + id + '/', function($){
 		var rows = $('tr.odd, tr.even');
 		rows.each(function(i, el){
 			var torrent = {
 				name: $(el).find('.torrentname .font12px').text(),
-				link: 'http://kat.ph' + $(el).find('.torrentname .font12px').attr('href'),
+				link: 'http://kickass.to' + $(el).find('.torrentname .font12px').attr('href'),
 				magnet: $(el).find('a.imagnet').attr('href'),
 				size: $(el).find('td.center').eq(0).text(),
 				seed: $(el).find('td.center').eq(1).text(),
