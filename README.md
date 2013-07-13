@@ -1,6 +1,6 @@
 # TV Party
 
-Uses [showRSS](http://showrss.karmorra.info/) and Transmission WebUI to automate adding torrents for all your favorite shows.
+Uses [Kick Ass Torrents](http://kickass.to/) and Transmission WebUI to automate adding torrents for all your favorite shows.
 
 "We're gonna have a TV party, tonight, alright!"
 
