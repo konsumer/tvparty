@@ -6,20 +6,7 @@ Data-provider for kat.ph tv torrents
 
 var moment = require('moment'),
 	events = require('events'),
-	ajax = require('superagent'),
-	cheerio = require('cheerio');
-
-/**
- * Shortcut for HTTP GET + cheerio-parse
- * 
- * @param  {String}   u        Full URL
- * @param  {Function} callback called with cheerio pseudo-jquery object for page
- */
-var get = function(u, callback){
-	ajax.get(u, function(error, res){
-		callback(cheerio.load(res.body, {ignoreWhitespace: true}));
-	});
-};
+	get = require('../get.js');
 
 /**
  * Get list of shows
@@ -63,7 +50,7 @@ exports.show = function(id){
 				name: $(el).find('.versionsEpName').text(),
 				show: id,
 				image: $('.movieCover img').attr('src'),
-				season: (season) ? parseInt(season.replace('Season ',''), 10) : '?'
+				season: (season) ? parseInt(season.replace('Season ',''), 10) : undefined
 			};
 			// sometimes it hasn't aired, but it is marked that it has torrents...
 			if ($(el).attr('onclick') && episode.date < moment().utc().unix()){
@@ -96,7 +83,7 @@ exports.torrents = function(id){
 				link: 'http://kickass.so' + $(el).find('.torrentname .font12px').attr('href'),
 				magnet: $(el).find('a.imagnet').attr('href'),
 				size: $(el).find('td.center').eq(0).text(),
-				seed: $(el).find('td.center').eq(1).text(),
+				seed: $(el).find('td.center').eq(1).text()
 			};
 
 			// normalize

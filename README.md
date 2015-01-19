@@ -1,6 +1,6 @@
 # TV Party
 
-Uses [Kick Ass Torrents](http://kickass.to/) and Transmission WebUI to automate adding torrents for all your favorite shows.
+Uses [Kick Ass Torrents](http://kickass.to/) or [eztv](https://eztv.ch) and Transmission WebUI to automate adding torrents for all your favorite shows.
 
 "We're gonna have a TV party, tonight, alright!"
 
@@ -32,6 +32,8 @@ Set your username, password, etc. `updateTime` is how often, in minutes, to chec
 `add_dir` is the directory where series will be put. It tries to guess name & season from name.
 
 In the directory where these files are, run `npm install`, then `npm start`
+
+`provider` can be `kat` or `eztv`.
 
 ## Install
 
