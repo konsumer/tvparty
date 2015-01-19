@@ -27,8 +27,6 @@ var get = function(u, callback){
 
 /**
  * Get list of shows
- * 
- * @param  {Function} callback called on a show
 */
 exports.all = function(){
 	var emitter = new events.EventEmitter();
@@ -54,7 +52,6 @@ exports.all = function(){
  * Get episode listings for a single show
  * 
  * @param  {String}   id       The ID from list()
- * @param  {Function} callback called on all episodes for this show
  */
 exports.show = function(id){
 	var emitter = new events.EventEmitter();
