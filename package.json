@@ -16,7 +16,7 @@
     "chai": ""
   },
   "scripts": {
-    "test": "mocha --reporter spec test/*.test.js",
+    "test": "mocha -t 20000",
     "start": "forever app.js"
   }
 }

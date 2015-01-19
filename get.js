@@ -9,6 +9,6 @@ var	ajax = require('superagent'),
  */
 module.exports = function(u, callback){
 	ajax.get(u, function(error, res){
-		callback(cheerio.load(res.body, {ignoreWhitespace: true}));
+		callback(cheerio.load(res.text, {ignoreWhitespace: true}));
 	});
 };

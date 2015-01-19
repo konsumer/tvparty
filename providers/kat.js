@@ -38,15 +38,15 @@ exports.all = function(){
  */
 exports.show = function(id){
 	var emitter = new events.EventEmitter();
-	get('http://kickass.so/' + id + '/', function($){
-		var links = $('a.infoListCut');
+	get('http://kickass.so/' + id, function($){
+		var links = $('.infoListCut');
 		links.each(function(i, el){
 			var season = $(el).parent().parent().parent().prev().html();
 			if (!season) season = $(el).parent().parent().prev().html();
 
 			var episode = {
 				date: moment($(el).find('.versionsEpDate').text().replace(/ +/g,' '), 'dddd, MMMM D YYYY').utc().unix(),
-				number: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
+				episode: parseInt($(el).find('.versionsEpNo').text().match(/\d+/)[0], 10),
 				name: $(el).find('.versionsEpName').text(),
 				show: id,
 				image: $('.movieCover img').attr('src'),

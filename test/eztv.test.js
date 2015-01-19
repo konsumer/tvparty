@@ -1,18 +1,20 @@
 if (!chai){ var chai = require('chai'); }
 var should = chai.should();
 
-var kat = require('../providers/kat.js');
+eztv = require('../providers/eztv.js');
 
-describe('Provider: Kat', function(){
+
+describe('Provider: EZTV', function(){
 	it('should load correctly', function(){
-		kat.should.be.an('object');
+		
+		eztv.should.be.an('object');
 	});
 
 	it('should list shows', function(done){
-		kat.all.should.be.a('function');
+		eztv.all.should.be.a('function');
 		
 		var show_count=0;
-		kat.all()
+		eztv.all()
 			.on('show', function(show){
 				show_count++;
 			})
@@ -23,10 +25,10 @@ describe('Provider: Kat', function(){
 	});
 
 	it('should list episodes', function(done){
-		kat.show.should.be.a('function');
+		eztv.show.should.be.a('function');
 		
 		var episode_count=0;
-		kat.show('game-of-thrones-tv24493')
+		eztv.show('481/game-of-thrones')
 			.on('episode', function(episode){
 				episode_count++;
 			})
@@ -38,9 +40,9 @@ describe('Provider: Kat', function(){
 
 	var torrents = [];
 	it('should list torrents', function(done){
-		kat.torrents.should.be.a('function');
+		eztv.torrents.should.be.a('function');
 		
-		kat.torrents('121148392')
+		eztv.torrents('Game of Thrones S04E10 1080p HDTV x264-BATV')
 			.on('torrent', function(torrent){
 				torrents.push(torrent);
 			})
@@ -52,8 +54,8 @@ describe('Provider: Kat', function(){
 	});
 
 	it('should find best torrent', function(){
-		kat.best.should.be.a('function');
-		var best = kat.best(torrents);
+		eztv.best.should.be.a('function');
+		var best = eztv.best(torrents);
 		best.magnet.should.ok();
 	});
 });

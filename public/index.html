@@ -91,7 +91,7 @@
                                 var ul = '<ul id="episodes">';
                                 var classes=[];
                                 show.episodes.forEach(function(episode){
-                                    var text = episode.season + '-' + episode.number + ': ' + episode.name;
+                                    var text = episode.season + '-' + episode.episode + ': ' + episode.name;
                                     if (episode.seen) classes.push('seen');
                                     if (episode.has_torrents) classes.push('available');
 
