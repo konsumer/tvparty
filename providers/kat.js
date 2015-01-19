@@ -142,10 +142,10 @@ exports.best = function(torrents){
 	torrents.sort(function(a,b){
 		return a.size - b.size;
 	});
-	for (i in torrents){
+	for (var i in torrents){
 		if (torrents[i].seed > 0){
 			return torrents[i];
 		}
 	}
-}
+};
 

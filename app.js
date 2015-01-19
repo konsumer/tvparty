@@ -8,7 +8,7 @@ var fs = require('fs'),
 	transmission = new Transmission(settings),
 	provider = require('./providers/' + settings.provider + '.js'),
 	seen = {},
-	subscriptions = []
+	subscriptions = [],
 	shows = [];
 
 // load optional stuff from JSON files, log if they are missing
@@ -21,7 +21,7 @@ try { subscriptions = require('./conf/subscriptions.json'); }catch(e){ console.l
  * @return {Object}    Copy of show
  */
 function getShow(id){
-	for(i in shows){
+	for(var i in shows){
 		if (shows[i].id == id){
 			return clone(shows[i]);
 		}
@@ -49,7 +49,7 @@ function updateSubscriptions(ignore, addPaused){
 									"download-dir": settings.add_dir + '/series ' + episode.season + '/' + getShow(episode.show).name
 								};
 								options.paused = (addPaused === true);
-								transmission.add(provider.best(torrents).magnet, options, function(err, result){if (result) console.log('added', result.name) });
+								transmission.add(provider.best(torrents).magnet, options, function(err, result){if (result) console.log('added', result.name); });
 							});
 					}
 				}
