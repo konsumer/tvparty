@@ -1,21 +1,22 @@
 {
-	"name": "tvparty",
-	"version": "0.0.1",
-	"dependencies": {
-		"cheerio":"",
-		"express": "",
-		"connect": "",
-		"transmission": "",
-		"moment":"",
-		"clone":""
-	},
-	"devDependencies": {
-		"forever": "",
-		"mocha": "",
-		"chai": ""
-	},
-	"scripts":{
-		"test": "mocha --reporter spec test/*.test.js",
-		"start": "forever app.js"
-	}
+  "name": "tvparty",
+  "version": "0.0.1",
+  "dependencies": {
+    "cheerio": "",
+    "clone": "",
+    "connect": "",
+    "express": "",
+    "moment": "",
+    "superagent": "^0.21.0",
+    "transmission": ""
+  },
+  "devDependencies": {
+    "forever": "",
+    "mocha": "",
+    "chai": ""
+  },
+  "scripts": {
+    "test": "mocha --reporter spec test/*.test.js",
+    "start": "forever app.js"
+  }
 }

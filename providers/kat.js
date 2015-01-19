@@ -5,23 +5,19 @@ Data-provider for kat.ph tv torrents
  */
 
 var moment = require('moment'),
-	events = require('events');
+	events = require('events'),
+	ajax = require('superagent'),
+	cheerio = require('cheerio');
 
 /**
- * Shortcut for zlib GET + cheerio-parse
+ * Shortcut for HTTP GET + cheerio-parse
  * 
  * @param  {String}   u        Full URL
  * @param  {Function} callback called with cheerio pseudo-jquery object for page
  */
 var get = function(u, callback){
-	require('http').get(require('url').parse(u), function(res){
-		var chunks = [];
-		res.pipe(require('zlib').createGunzip())
-			.on('data', function (data) { chunks.push(data); })
-			.on('end', function(){
-				var buffer = Buffer.concat(chunks);
-				callback(require('cheerio').load(buffer, {ignoreWhitespace: true}));
-			});
+	ajax.get(u, function(error, res){
+		callback(cheerio.load(res.body, {ignoreWhitespace: true}));
 	});
 };
 
@@ -30,13 +26,13 @@ var get = function(u, callback){
 */
 exports.all = function(){
 	var emitter = new events.EventEmitter();
-	get('http://kickass.to/tv/show/', function($){
+	get('http://kickass.so/tv/show/', function($){
 		var links = $('ul.textcontent a.plain');
 		links.each(function(i, el){
 			var show = {
 				id: decodeURIComponent($(el).attr('href').replace(/\//g,'')),
 				name: $(el).text(),
-				url:  'http://kickass.to/' + $(el).attr('href'),
+				url:  'http://kickass.so/' + $(el).attr('href'),
 				source: 'kat'
 			};
 			emitter.emit('show', show);
@@ -55,7 +51,7 @@ exports.all = function(){
  */
 exports.show = function(id){
 	var emitter = new events.EventEmitter();
-	get('http://kickass.to/' + id + '/', function($){
+	get('http://kickass.so/' + id + '/', function($){
 		var links = $('a.infoListCut');
 		links.each(function(i, el){
 			var season = $(el).parent().parent().parent().prev().html();
@@ -92,12 +88,12 @@ exports.show = function(id){
  */
 exports.torrents = function(id){
 	var emitter = new events.EventEmitter();
-	get('http://kickass.to/media/getepisode/' + id + '/', function($){
+	get('http://kickass.so/media/getepisode/' + id + '/', function($){
 		var rows = $('tr.odd, tr.even');
 		rows.each(function(i, el){
 			var torrent = {
 				name: $(el).find('.torrentname .font12px').text(),
-				link: 'http://kickass.to' + $(el).find('.torrentname .font12px').attr('href'),
+				link: 'http://kickass.so' + $(el).find('.torrentname .font12px').attr('href'),
 				magnet: $(el).find('a.imagnet').attr('href'),
 				size: $(el).find('td.center').eq(0).text(),
 				seed: $(el).find('td.center').eq(1).text(),

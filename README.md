@@ -54,3 +54,9 @@ I made a sweet admin at `http://{NAS_ADDRESS}:{SERVE_PORT}/` that you can use to
 ## Testing
 
 Run `npm test` to test the various parts of tvparty. See usage examples of the code in `test/` directory.
+
+## TODO
+
+- add streaming support
+- add internal torrent client option
+- split providers into seperate node modules
