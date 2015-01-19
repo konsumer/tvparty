@@ -1,6 +1,7 @@
 var fs = require('fs'),
 	path = require('path'),
 	express = require('express'),
+	bodyParser = require('body-parser'),
 	Transmission = require('transmission'),
 	clone = require('clone'),
 	events = require('events'),
@@ -87,8 +88,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // serve up REST API
 
-app.use(express.bodyParser());
-app.use(express.logger());
+app.use(bodyParser());
 
 // cross-domain
 app.use(function(req, res, next) {

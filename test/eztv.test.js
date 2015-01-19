@@ -28,7 +28,7 @@ describe('Provider: EZTV', function(){
 		eztv.show.should.be.a('function');
 		
 		var episode_count=0;
-		eztv.show('481/game-of-thrones')
+		eztv.show('481-game-of-thrones')
 			.on('episode', function(episode){
 				episode_count++;
 			})

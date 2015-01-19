@@ -16,10 +16,10 @@ var moment = require('moment'),
 exports.all = function(){
 	var emitter = new events.EventEmitter();
 	get('https://eztv.ch/showlist/', function($){
-		var links = $('a.thread_link');
+		var links = $('td:nth-child(2) a.thread_link');
 		links.each(function(i,el){
 			var show = {
-				id: $(el).attr('href').replace(/\/shows\/([0-9]+)\/(.+)\//, '$1/$2'),
+				id: $(el).attr('href').replace(/\/shows\/([0-9]+)\/(.+)\//, '$1-$2'),
 				name: $(el).text(),
 				url:  'https://eztv.ch/' + $(el).attr('href'),
 				source: 'eztv'
@@ -41,7 +41,7 @@ exports.all = function(){
  */
 exports.show = function(id, torrents){
 	var emitter = new events.EventEmitter();
-	get('https://eztv.ch/shows/' + id, function($){
+	get('https://eztv.ch/shows/' + id.replace(/([0-9])+-(.+)/,'$1/$2'), function($){
 		var links = $('.forum_thread_post:nth-child(2) a');
 		links.each(function(i,el){
 			var episode = {

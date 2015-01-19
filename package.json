@@ -2,10 +2,11 @@
   "name": "tvparty",
   "version": "0.0.1",
   "dependencies": {
+    "body-parser": "",
     "cheerio": "",
     "clone": "",
     "connect": "",
-    "express": "",
+    "express": "^5.0.0-alpha.1",
     "moment": "",
     "superagent": "^0.21.0",
     "transmission": ""
