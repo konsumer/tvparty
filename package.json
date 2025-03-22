@@ -1,23 +1,24 @@
 {
   "name": "tvparty",
-  "version": "0.0.1",
-  "dependencies": {
-    "body-parser": "",
-    "cheerio": "",
-    "clone": "",
-    "connect": "",
-    "express": "^5.0.0-alpha.1",
-    "moment": "",
-    "superagent": "^0.21.0",
-    "transmission": ""
-  },
-  "devDependencies": {
-    "forever": "",
-    "mocha": "",
-    "chai": ""
-  },
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "test": "mocha -t 20000",
-    "start": "forever app.js"
+    "test": "node --test",
+    "format": "npx -y prettier --write .",
+    "find": "node -r dotenv/config src/find.js"
+  },
+  "keywords": [
+    "torrent",
+    "ai"
+  ],
+  "author": "konsumer",
+  "license": "MIT",
+  "description": "Download torrents with AI",
+  "dependencies": {
+    "@robertklep/qbittorrent": "^1.0.1",
+    "dotenv": "^16.4.7",
+    "ollama": "^0.5.14",
+    "plex-api": "^5.3.2"
   }
 }
