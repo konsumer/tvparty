@@ -31,7 +31,7 @@ npm run find "Trueblood Season 2"
 
 ### docker
 
-I have also setup all the services:
+I have also setup all the services for docker-compose:
 
 ```bash
 docker compose up -d
