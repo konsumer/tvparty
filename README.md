@@ -17,7 +17,7 @@ This is an agentic AI setup, where ollama is used to find and download tv/movie 
 
 Once that is verified:
 
-```
+```bash
 git clone https://github.com/konsumer/tvparty
 cd tvparty
 npm i
@@ -33,7 +33,7 @@ npm run find "Trueblood Season 2"
 
 I have also setup all the services:
 
-```
+```bash
 docker compose up -d
 
 # CLI mode: find & download True Blood Season 2
