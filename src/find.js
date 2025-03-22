@@ -25,3 +25,9 @@ const plugins = {
   torrent: new PluginQbitorrent(TVPARTY_QTORRENT),
   library: new PluginPlex(TVPARTY_PLEX)
 }
+
+for (const plugin of Object.values(plugins)) {
+  if (plugin.check) {
+    await plugin.check(true)
+  }
+}

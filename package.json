@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node --test",
     "format": "npx -y prettier --write .",
-    "find": "node -r dotenv/config src/find.js"
+    "find": "node --no-deprecation -r dotenv/config src/find.js"
   },
   "keywords": [
     "torrent",
