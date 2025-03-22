@@ -11,9 +11,9 @@ This is an agentic AI setup, where ollama is used to find and download tv/movie 
 - Run [ollama](https://ollama.com/)
 - Run [plex server](https://www.plex.tv/)
 - Run [qBittorrent](https://www.qbittorrent.org/) with WebUi enabled
-- Setup some search plugins
-- Test: can you manually find torrents and download them for a show you like?
-- Test: if you put a video file in your "tv" library on plex, does it show in UI?
+- Setup some qtorrent search plugins
+- *Test*: can you manually find torrents and download them for a show you like?
+- *Test*: if you put a video file in your "tv" library on plex, does it show in UI?
 
 Once that is verified:
 
