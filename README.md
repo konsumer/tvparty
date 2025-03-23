@@ -25,8 +25,11 @@ npm i
 # edit your configuration
 cp env.example .env
 
-# CLI mode: find & download True Blood Season 2
+# test: find & download True Blood Season 2
 npm run find "Trueblood Season 2"
+
+# server: find stuff you watch and download it
+npm start
 ```
 
 ### docker
@@ -36,6 +39,9 @@ I have also setup all the services for docker-compose:
 ```bash
 docker compose up -d
 
-# CLI mode: find & download True Blood Season 2
+# test: find & download True Blood Season 2
 npm run find "Trueblood Season 2"
+
+# server: find stuff you watch and download it
+npm start
 ```

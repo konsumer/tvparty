@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test",
     "format": "npx -y prettier --write .",
-    "find": "node --no-deprecation -r dotenv/config src/find.js"
+    "find": "node --no-deprecation -r dotenv/config src/find.js",
+    "start": "node --no-deprecation -r dotenv/config src/server.js"
   },
   "keywords": [
     "torrent",
@@ -17,8 +18,16 @@
   "description": "Download torrents with AI",
   "dependencies": {
     "@robertklep/qbittorrent": "^1.0.1",
+    "@tailwindcss/vite": "^4.0.15",
+    "@vitejs/plugin-react": "^4.3.4",
+    "daisyui": "^5.0.9",
     "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "ollama": "^0.5.14",
-    "plex-api": "^5.3.2"
+    "plex-api": "^5.3.2",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.15",
+    "vite": "^6.2.2",
+    "vite-express": "^0.20.0"
   }
 }
