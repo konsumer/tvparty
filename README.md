@@ -28,8 +28,8 @@ cp env.example .env
 # run this to get your plex token (and add it's output to your .env)
 npm run plex_login USERNAME PASSWORD URL
 
-# test: find & download True Blood Season 2
-npm run find "Trueblood Season 2"
+# test: find & download True Blood Season 2, Episode 1
+npm run find "Trueblood S2E1"
 
 # server: find stuff you watch and download it
 npm start
@@ -43,7 +43,7 @@ I have also setup all the services for docker-compose:
 docker compose up -d
 
 # test: find & download True Blood Season 2
-npm run find "Trueblood Season 2"
+npm run find "Trueblood S2E1"
 
 # server: find stuff you watch and download it
 npm start
