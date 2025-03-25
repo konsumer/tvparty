@@ -25,6 +25,9 @@ npm i
 # edit your configuration
 cp env.example .env
 
+# run this to get your plex token (and add it's output to your .env)
+npm run plex_login USERNAME PASSWORD URL
+
 # test: find & download True Blood Season 2
 npm run find "Trueblood Season 2"
 

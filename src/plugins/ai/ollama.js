@@ -1,8 +1,15 @@
 import { Ollama } from 'ollama'
 
+const { TVPARTY_OLLAMA } = process.env
+
+if (!TVPARTY_OLLAMA) {
+  console.error('TVPARTY_OLLAMA env-var is required. Please see README.')
+  process.exit(1)
+}
+
 export default class PluginOllama {
-  constructor(url) {
-    const u = new URL(url)
+  constructor() {
+    const u = new URL(TVPARTY_OLLAMA)
     this.client = new Ollama({ host: u.origin })
     this.model = u.pathname.slice(1)
   }
@@ -22,5 +29,9 @@ export default class PluginOllama {
       }
       throw error
     }
+  }
+
+  async query(messages, options = {}) {
+    return this.client.chat({ model: this.model, messages, ...options })
   }
 }

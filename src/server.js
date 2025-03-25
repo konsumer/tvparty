@@ -2,11 +2,11 @@
 
 import express from 'express'
 import ViteExpress from 'vite-express'
-import loadPlugins from './plugins.js'
+import { setup, search } from './engine.js'
 
 const { PORT = 3000 } = process.env
 
-const plugins = await loadPlugins(true)
+const plugins = await setup()
 
 const app = express()
 
