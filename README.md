@@ -48,3 +48,12 @@ npm run find "Trueblood S2E1"
 # server: find stuff you watch and download it
 npm start
 ```
+
+### TODO
+
+- I think it might be better to use [parse-torrent-title](https://www.npmjs.com/package/parse-torrent-title) instead of AI to parse search, and look at torrent results.
+- subscribe to shows
+- setup calendar for upcoming shows
+- periodically search for episodes that could have aired but are not downloaded/downloading
+- finish docker-compose setup
+- make video showing how to set it up
